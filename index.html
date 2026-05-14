@@ -113,6 +113,14 @@
   .intro-text { font-size: 21px; padding: 0 20px 20px; color: rgba(255,255,255,0.85); }
   .intro-text em { color: var(--pink); font-style: normal; text-decoration: underline; }
 
+.portrait-image{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  filter:saturate(0.95) contrast(1.05);
+}
+
   /* ── NAV GRID (2 columns) ── */
   .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--pink); border: 1px solid var(--pink); }
   .nav-item { 
@@ -193,7 +201,11 @@
       <div class="win-btns"><span></span><span></span></div>
     </div>
     <div class="profile-section">
-      <div class="avatar-small">?</div>
+<img 
+  src="assets/images/B708AD55-B66B-403A-A925-54EA590DA96E.jpeg"
+  alt="Giovanna"
+  class="portrait-image"
+/>
       <div>
         <div style="font-size:24px; color:var(--pink); line-height:1;">giovanna</div>
         <div style="font-size:12px; color:var(--blue); letter-spacing:2px; margin-top:5px;">GRAPHIC DESIGNER</div>
