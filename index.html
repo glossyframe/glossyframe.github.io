@@ -193,44 +193,6 @@ body::before{
 }
 
 /* ───────────────────────── */
-/* FLOATING TAGS             */
-/* ───────────────────────── */
-
-.float-tag{
-  position:absolute;
-
-  padding:6px 10px;
-
-  border:1px solid var(--blue);
-
-  background:rgba(36,36,36,0.92);
-
-  color:var(--blue);
-
-  font-size:13px;
-
-  letter-spacing:1px;
-
-  box-shadow:3px 3px 0 rgba(0,0,0,0.35);
-
-  backdrop-filter:blur(5px);
-
-  animation:floatTag 5s ease-in-out infinite;
-
-  z-index:2;
-}
-
-@keyframes floatTag{
-  0%,100%{
-    transform:translateY(0px) rotate(-2deg);
-  }
-
-  50%{
-    transform:translateY(-10px) rotate(2deg);
-  }
-}
-
-/* ───────────────────────── */
 /* SPARKLES                  */
 /* ───────────────────────── */
 
@@ -277,7 +239,7 @@ body::before{
 
   line-height:0.82;
 
-  color:var(--pink);
+  color:var(--blue);
 
   text-shadow:
     0 0 12px rgba(255,229,235,0.15),
@@ -289,7 +251,7 @@ body::before{
 .hero-star{
   display:inline-block;
 
-  animation:starSpin 10s linear infinite;
+  animation:starSpin 15s linear infinite;
 }
 
 @keyframes starSpin{
@@ -311,7 +273,7 @@ body::before{
 
   text-transform:uppercase;
 
-  color:var(--blue);
+  color:var(--pink);
 
   opacity:0.85;
 }
@@ -466,9 +428,7 @@ body::before{
 
   grid-template-columns:1fr 1fr;
 
-  gap:2px;
-
-  background:var(--blue);
+  gap:1px;
 
   border-top:1px solid rgba(0,0,0,0.10);
 }
@@ -635,10 +595,6 @@ body::before{
     font-size:58px;
   }
 
-  .float-tag{
-    font-size:10px;
-  }
-
 }
 
 </style>
@@ -654,16 +610,13 @@ body::before{
 <header class="topbar">
 
   <div class="topbar-logo">
-    glossyframe ★
+    glossyframe
   </div>
 
   <div class="topbar-right">
 
-    <div class="system-status">
-      <div class="dot"></div>
-
       <div id="clock">
-        00:00:00 • BR
+        00:00:00
       </div>
     </div>
 
@@ -675,15 +628,7 @@ body::before{
 
   <section class="hero">
 
-    <div class="float-tag" style="top:12px; left:-4px;">
-      creativity ✦
-    </div>
-
-    <div class="float-tag" style="bottom:18px; right:-4px; border-color:var(--pink); color:var(--pink); animation-delay:1s;">
-      ✦ visual_world
-    </div>
-
-    <h1 class="hero-title">
+      <h1 class="hero-title">
       glossyframe <span class="hero-star">★</span>
     </h1>
 
@@ -706,7 +651,6 @@ body::before{
       <span>profile_info.txt</span>
 
       <div class="win-btns">
-        <span></span>
         <span></span>
       </div>
 
@@ -735,7 +679,7 @@ body::before{
     </div>
 
     <p class="intro">
-      oi, eu sou a giovanna! crio universos visuais e digitais inspirados em aesthetics, cultura da internet, direção criativa e estética y2k.
+      oi, eu sou a giovanna! crio universos visuais e digitais inspirados em aesthetics, cultura da internet e direção criativa.
     </p>
 
   </section>
@@ -747,7 +691,7 @@ body::before{
     <div class="win-header blue">
 
       <span>
-        directory_menu
+        menu_index.exe
       </span>
 
       <div class="win-btns">
@@ -761,11 +705,11 @@ body::before{
       <a href="#" class="nav-item">
 
         <span class="nav-title">
-          portfólio
+          portfolio
         </span>
 
         <span class="nav-sub">
-          trabalhos
+          recent work
         </span>
 
       </a>
@@ -773,11 +717,11 @@ body::before{
       <a href="#" class="nav-item">
 
         <span class="nav-title">
-          pinterest
+          visual feed
         </span>
 
         <span class="nav-sub">
-          moodboards
+          moodboards & inspo
         </span>
 
       </a>
@@ -789,7 +733,7 @@ body::before{
         </span>
 
         <span class="nav-sub">
-          get a quote
+          work with me
         </span>
 
       </a>
@@ -822,12 +766,13 @@ body::before{
 
       <div class="win-btns">
         <span></span>
-        <span></span>
       </div>
 
     </div>
 
     <div class="service-card">
+
+       <a href="#" class="service-card">
 
       <div class="service-name">
         visual universe ✦
@@ -837,9 +782,13 @@ body::before{
         direção visual e construção estética para marcas autorais, projetos criativos e identidades digitais. <em>saiba mais.</em>
       </p>
 
+      
+
     </div>
 
     <div class="service-card">
+
+      <a href="#" class="service-card">
 
       <div class="service-name">
         social media design ✦
@@ -852,6 +801,8 @@ body::before{
     </div>
 
     <div class="service-card">
+
+      <a href="#" class="service-card">
 
       <div class="service-name">
         creative graphics ✦
@@ -880,9 +831,7 @@ body::before{
     <div class="footer-status">
 
       <div class="dot"></div>
-
-      <span id="footerClock">
-        CORE SYSTEM 00:00:00 • BR
+        CORE SYSTEM ONLINE
       </span>
 
     </div>
@@ -908,9 +857,6 @@ function updateClock(){
   const fullTime = `${h}:${m}:${s} • BR`;
 
   document.getElementById("clock").textContent = fullTime;
-
-  document.getElementById("footerClock").textContent =
-    `CORE SYSTEM ${fullTime}`;
 
 }
 
