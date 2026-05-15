@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>glossyframe ★ | design & direção criativa</title>
+<title>glossyframe ★ design & direção criativa</title>
 
 <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
@@ -60,6 +60,12 @@ body{
 
   -webkit-font-smoothing:none;
   text-rendering:optimizeSpeed;
+  
+  cursor:crosshair;
+}
+
+a{
+  cursor:pointer;
 }
 
 /* ───────────────────────── */
@@ -239,19 +245,21 @@ body::before{
 
   line-height:0.82;
 
-  color:var(--blue);
+  color:var(--pink);
 
   text-shadow:
     0 0 12px rgba(255,229,235,0.15),
     0 0 30px rgba(255,229,235,0.08);
 
-  margin-bottom:12px;
+  margin-bottom:30px;
 }
 
 .hero-star{
   display:inline-block;
-
-  animation:starSpin 15s linear infinite;
+  font-size:0.82em;
+  margin-left:-6px;
+  vertical-align:top;
+  animation:starSpin 25s linear infinite;
 }
 
 @keyframes starSpin{
@@ -267,13 +275,13 @@ body::before{
 .hero-subtitle{
   font-family:var(--sans);
 
-  font-size:12px;
+  font-size:15px;
 
-  letter-spacing:5px;
+  letter-spacing:3px;
 
   text-transform:uppercase;
 
-  color:var(--pink);
+  color:var(--blue);
 
   opacity:0.85;
 }
@@ -285,7 +293,7 @@ body::before{
 
   color:rgba(255,255,255,0.45);
 
-  letter-spacing:2px;
+  letter-spacing:3px;
 }
 
 /* ───────────────────────── */
@@ -309,17 +317,29 @@ body::before{
 
   overflow:hidden;
 
-  transition:0.25s ease;
+  opacity:0;
+
+  transform:translateY(20px);
+
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.win-box.show{
+  opacity:1;
+
+  transform:translateY(0);
 }
 
 .win-box:hover{
-  transform:translate(-2px,-2px);
+  transform:translateY(-2px);
 
   box-shadow:
-    9px 9px 0 rgba(0,0,0,0.40),
+    7px 7px 0 rgba(0,0,0,0.38),
     inset 0 0 0 1px rgba(255,255,255,0.03);
 }
-
+  
 .win-header{
   display:flex;
   align-items:center;
@@ -381,6 +401,11 @@ body::before{
   background:rgba(207,237,255,0.05);
 
   flex-shrink:0;
+
+   border-radius:2px;
+
+  box-shadow:
+    0 0 12px rgba(207,237,255,0.10);
 }
 
 .profile-name{
@@ -409,6 +434,10 @@ body::before{
   font-size:23px;
 
   color:rgba(255,255,255,0.86);
+
+  max-width:540px;
+
+  margin-right:auto;
 }
 
 .intro em{
@@ -428,7 +457,7 @@ body::before{
 
   grid-template-columns:1fr 1fr;
 
-  gap:1px;
+  gap:2px;
 
   border-top:1px solid rgba(0,0,0,0.10);
 }
@@ -455,7 +484,10 @@ body::before{
 }
 
 .nav-item:hover{
-  background:rgba(255,229,235,0.08);
+  background:rgba(255,255,255,0.04);
+
+  box-shadow:
+    inset 0 0 18px rgba(255,229,235,0.06);
 }
 
 .nav-item:active{
@@ -526,6 +558,18 @@ body::before{
   text-decoration:underline;
 }
 
+  .service-link{
+  color: var(--pink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: 0.2s ease;
+}
+
+.service-link:hover{
+  opacity: 0.7;
+  text-shadow: 0 0 8px rgba(255,229,235,0.25);
+}
+
 /* ───────────────────────── */
 /* FOOTER                    */
 /* ───────────────────────── */
@@ -538,6 +582,13 @@ body::before{
   border-top:1px solid rgba(255,255,255,0.08);
 
   text-align:center;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255,255,255,0.02)
+    );
 }
 
 .footer-logo{
@@ -593,6 +644,7 @@ body::before{
 
   .hero-title{
     font-size:58px;
+    line-height:0.92;
   }
 
 }
@@ -610,10 +662,13 @@ body::before{
 <header class="topbar">
 
   <div class="topbar-logo">
-    glossyframe
+    ★ ★ ★
   </div>
 
   <div class="topbar-right">
+
+    <div class="system-status">
+      <div class="dot"></div>
 
       <div id="clock">
         00:00:00
@@ -628,7 +683,7 @@ body::before{
 
   <section class="hero">
 
-      <h1 class="hero-title">
+    <h1 class="hero-title">
       glossyframe <span class="hero-star">★</span>
     </h1>
 
@@ -637,7 +692,7 @@ body::before{
     </p>
 
     <div class="hero-mini">
-      ✦ visual identities for dreamy brands ✦
+      ✦ for dreamy brands ✦
     </div>
 
   </section>
@@ -717,7 +772,7 @@ body::before{
       <a href="#" class="nav-item">
 
         <span class="nav-title">
-          visual feed
+          pinterest
         </span>
 
         <span class="nav-sub">
@@ -756,65 +811,75 @@ body::before{
 
   <!-- SERVICES -->
 
-  <section class="win-box">
+<section class="win-box">
 
-    <div class="win-header">
+  <div class="win-header">
 
-      <span>
-        services_list.log
-      </span>
+    <span>
+      services_list.log
+    </span>
 
-      <div class="win-btns">
-        <span></span>
-      </div>
-
+    <div class="win-btns">
+      <span></span>
     </div>
 
-    <div class="service-card">
+  </div>
 
-       <a href="#" class="service-card">
+  <div class="service-card">
 
-      <div class="service-name">
-        visual universe ✦
-      </div>
+    <div class="service-name">
+      visual universe ✦
+    </div>
 
-      <p class="service-desc">
-        direção visual e construção estética para marcas autorais, projetos criativos e identidades digitais. <em>saiba mais.</em>
-      </p>
-
+    <p class="service-desc">
+      direção visual e construção estética para marcas autorais, projetos criativos e identidades digitais.
       
+      <a href="COLE_AQUI_O_LINK_DO_NOTION"
+         class="service-link"
+         target="_blank">
+         saiba mais.
+      </a>
+    </p>
 
+  </div>
+
+  <div class="service-card">
+
+    <div class="service-name">
+      social media design ✦
     </div>
 
-    <div class="service-card">
+    <p class="service-desc">
+      posts, carrosséis e conteúdo visual com consistência estética e identidade própria para redes sociais.
+      
+      <a href="COLE_AQUI_O_LINK_DO_NOTION"
+         class="service-link"
+         target="_blank">
+         saiba mais.
+      </a>
+    </p>
 
-      <a href="#" class="service-card">
+  </div>
 
-      <div class="service-name">
-        social media design ✦
-      </div>
+  <div class="service-card">
 
-      <p class="service-desc">
-        posts, carrosséis e conteúdo visual com consistência estética e identidade própria para redes sociais. <em>saiba mais.</em>
-      </p>
-
+    <div class="service-name">
+      creative graphics ✦
     </div>
 
-    <div class="service-card">
+    <p class="service-desc">
+      flyers, posters, banners, capas, materiais digitais e peças gráficas criadas com direção artística.
+      
+      <a href="COLE_AQUI_O_LINK_DO_NOTION"
+         class="service-link"
+         target="_blank">
+         saiba mais.
+      </a>
+    </p>
 
-      <a href="#" class="service-card">
+  </div>
 
-      <div class="service-name">
-        creative graphics ✦
-      </div>
-
-      <p class="service-desc">
-        flyers, posters, banners, capas, materiais digitais e peças gráficas criadas com direção artística. <em>saiba mais.</em>
-      </p>
-
-    </div>
-
-  </section>
+</section>
 
   <!-- FOOTER -->
 
@@ -830,11 +895,13 @@ body::before{
 
     <div class="footer-status">
 
-      <div class="dot"></div>
-        CORE SYSTEM ONLINE
-      </span>
+  <div class="dot"></div>
 
-    </div>
+  <span>
+    CORE SYSTEM ONLINE
+  </span>
+
+</div>
 
   </footer>
 
@@ -854,8 +921,8 @@ function updateClock(){
   const m = String(now.getMinutes()).padStart(2, "0");
   const s = String(now.getSeconds()).padStart(2, "0");
 
-  const fullTime = `${h}:${m}:${s} • BR`;
-
+  const fullTime = `[ ${h}:${m}:${s} ]`;
+  
   document.getElementById("clock").textContent = fullTime;
 
 }
@@ -874,9 +941,7 @@ const observer = new IntersectionObserver((entries)=>{
 
     if(entry.isIntersecting){
 
-      entry.target.style.opacity = "1";
-
-      entry.target.style.transform = "translateY(0px)";
+      entry.target.classList.add("show");
 
     }
 
@@ -887,13 +952,6 @@ const observer = new IntersectionObserver((entries)=>{
 });
 
 document.querySelectorAll(".win-box").forEach((box)=>{
-
-  box.style.opacity = "0";
-
-  box.style.transform = "translateY(20px)";
-
-  box.style.transition =
-    "0.7s cubic-bezier(0.16, 1, 0.3, 1)";
 
   observer.observe(box);
 
