@@ -1,620 +1,1014 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>glossyframe ★ design & direção criativa</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+<title>glossyframe ★ design & direção criativa</title>
 
-  <style>
-    :root {
-      --dark: #000000;
-      --dark-soft: #090909;
-      --pink: #ffe5eb;
-      --blue: #cfedff;
-      --white: #ffffff;
-      --border: #ffffff;
-      --pixel: 'VT323', monospace;
-      --title: 'Silkscreen', cursive;
-      --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    }
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
 
-    html {
-      scroll-behavior: smooth;
-    }
+:root {
+  /* Paleta Pastel Baseada no teu Tema */
+  --bg-purple: #e2daf1;
+  --win-bg: #ffffff;
+  --win-border: #000000;
+  
+  --pink: #ffc2d4;
+  --pink-soft: #ffe5ec;
+  --blue: #b3e5fc;
+  --blue-soft: #e1f5fe;
+  --yellow: #ffe082;
+  --purple: #b39ddb;
+  
+  --dark: #212121;
+  --white: #ffffff;
+  --gray: #8e8e8e;
 
-    body {
-      background-color: #000;
-      background-image:
-        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.05) 1px, transparent 1px),
-        radial-gradient(circle at 80% 60%, rgba(207,237,255,0.07) 1px, transparent 1px),
-        radial-gradient(circle at 50% 80%, rgba(255,229,235,0.07) 1px, transparent 1px),
-        linear-gradient(to bottom, #020202 0%, #000 100%);
-      background-size: 140px 140px, 180px 180px, 220px 220px, cover;
-      color: var(--white);
-      font-family: var(--pixel);
-      overflow-x: hidden;
-      padding-top: 58px;
-      line-height: 1.4;
-      cursor: crosshair;
-      image-rendering: pixelated;
-      -webkit-font-smoothing: none;
-      text-rendering: optimizeSpeed;
-    }
+  --pixel: 'VT323', monospace;
+  --title: 'Silkscreen', cursive;
+  --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 
-    /* EFFECT NOISE & CRT */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.03),
-        rgba(255,255,255,0.03) 1px,
-        transparent 1px,
-        transparent 2px
-      );
-      mix-blend-mode: soft-light;
-      pointer-events: none;
-      z-index: 9998;
-    }
+html {
+  scroll-behavior: smooth;
+}
 
-    ::selection {
-      background: var(--pink);
-      color: #000;
-    }
+body {
+  background-color: var(--bg-purple);
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.7) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 1px, transparent 1px);
+  background-size: 24px 24px;
 
-    /* SCROLLBAR */
-    ::-webkit-scrollbar { width: 14px; }
-    ::-webkit-scrollbar-track { background: #000; border-left: 2px solid #fff; }
-    ::-webkit-scrollbar-thumb { background: #000; border: 2px solid #fff; }
+  color: var(--dark);
+  font-family: var(--pixel);
+  overflow-x: hidden;
+  line-height: 1.4;
+  padding-top: 58px;
+  -webkit-font-smoothing: none;
+  text-rendering: optimizeSpeed;
+  cursor: crosshair;
+}
 
-    .container {
-      width: 100%;
-      max-width: 790px;
-      margin: 0 auto;
-      padding: 20px;
-    }
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.02),
+    rgba(0, 0, 0, 0.02) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
 
-    /* TOPBAR */
-    .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 42px;
-      background: #000;
-      border-bottom: 1px solid #fff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 16px;
-      z-index: 5000;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 2px 0 #fff;
-    }
+::selection {
+  background: var(--pink);
+  color: var(--dark);
+}
 
-    .topbar-logo { color: var(--blue); font-size: 20px; letter-spacing: 1px; }
-    
-    .topbar-nav { display: flex; }
-    .topbar-nav a {
-      color: #fff;
-      text-decoration: none;
-      padding: 0 12px;
-      font-size: 17px;
-      border-left: 1px solid rgba(255,255,255,0.2);
-      transition: 0.1s steps(2);
-    }
-    .topbar-nav a:hover { background: #fff; color: #000; }
+/* SCROLLBAR RETRO */
+::-webkit-scrollbar {
+  width: 16px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-left: 2px solid var(--win-border);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gray);
+  border: 2px solid var(--win-border);
+  box-shadow: inset -2px -2px 0px #555, inset 2px 2px 0px #fff;
+}
 
-    .system-status { display: flex; align-items: center; color: var(--pink); font-size: 26px; }
-    .dot { width: 8px; height: 8px; background: var(--blue); animation: pulse 4s infinite steps(2); }
+/* GLOBAL CONTAINER */
+.container {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 22px;
+}
 
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-    /* HERO */
-    .hero { text-align: center; padding: 60px 0 40px; }
-    .hero-title { font-family: var(--pixel); font-size: clamp(38px, 9vw, 74px); line-height: 1; color: #fff; }
-    .hero-star { color: var(--white); display: inline-block; animation: spin 30s infinite linear; }
+/* TOPBAR RETRO */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 42px;
+  background: var(--white);
+  border-bottom: 3px solid var(--win-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 5000;
+  box-shadow: 0 2px 0px rgba(0,0,0,0.1);
+}
 
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.topbar-logo {
+  font-family: var(--pixel);
+  color: var(--dark);
+  font-size: 20px;
+}
 
-    .hero-subtitle { margin-top: 18px; font-family: var(--sans); font-size: 10px; letter-spacing: 5px; color: var(--blue); text-transform: uppercase; }
-    .hero-mini { margin-top: 14px; color: var(--pink); font-size: 17px; letter-spacing: 2px; }
-    .boot-line { margin-top: 18px; color: rgba(255,255,255,0.5); font-size: 18px; animation: flicker 2s infinite steps(2); }
+.topbar-nav {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
 
-    @keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.topbar-nav a {
+  padding: 0 14px;
+  font-size: 22px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-left: 2px solid var(--win-border);
+  transition: 0.1s steps(2);
+}
 
-    /* SPARKLES */
-    .sparkle { position: fixed; pointer-events: none; z-index: 1; animation: sparkle 2s infinite steps(3); }
-    .sp-pink { color: var(--pink); }
-    .sp-blue { color: var(--blue); }
+.topbar-nav a:hover {
+  background: var(--pink);
+}
 
-    @keyframes sparkle { 0%, 100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.5); opacity: 0.8; } }
+.system-status {
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+  font-weight: bold;
+}
 
-    /* WINDOW BOXES */
-    .win-box, .radio-box {
-      margin-bottom: 34px;
-      background: #000;
-      border-top: 2px solid #fff;
-      border-left: 2px solid #fff;
-      border-right: 2px solid #737373;
-      border-bottom: 2px solid #737373;
-      box-shadow: 0 0 0 1px #000, 7px 7px 0 rgba(255,255,255,0.9);
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 0.4s steps(4), transform 0.4s steps(4), box-shadow 0.2s ease;
-    }
+/* GATINHO FLUTUANTE */
+.pixel-cat {
+  position: fixed; 
+  bottom: 52px; 
+  right: 24px; 
+  z-index: 400; 
+  pointer-events: auto;
+  cursor: pointer;
+  animation: catfloat 2s ease-in-out infinite alternate;
+  -webkit-tap-highlight-color: transparent;
+}
 
-    .win-box.show, .radio-box.show { opacity: 1; transform: translateY(0); }
-    .win-box:hover { box-shadow: 0 0 0 1px #000, 7px 7px 0 var(--pink); }
-    .radio-box:hover { box-shadow: 0 0 0 1px #000, 7px 7px 0 var(--blue); }
-    .win-box.closed, .radio-box.closed { display: none; }
+.pixel-cat.cat-jump {
+  animation: catjump 0.4s ease-out;
+}
 
-    .win-box.minimized .win-content,
-    .radio-box.minimized .radio-body,
-    .win-box.minimized .dither-strip,
-    .radio-box.minimized .dither-strip { display: none; }
-    .win-box.minimized, .radio-box.minimized { margin-bottom: 12px; }
+@keyframes catfloat { 
+  from { transform: translateY(0); } 
+  to { transform: translateY(-10px); } 
+}
 
-    /* HEADER */
-    .win-header { display: flex; align-items: center; padding: 5px 8px; border-bottom: 2px solid #fff; position: relative; background: #000; gap: 8px; }
-    .win-header::before {
-      content: ""; position: absolute; left: 40px; right: 40px; top: 50%; height: 6px; transform: translateY(-50%);
-      background: repeating-linear-gradient(0deg, #fff, #fff 1px, transparent 1px, transparent 2px); opacity: 0.35;
-    }
+@keyframes catjump {
+  0% { transform: translateY(0) scale(1, 1); }
+  50% { transform: translateY(-40px) scale(0.9, 1.1); }
+  100% { transform: translateY(0) scale(1, 1); }
+}
 
-    .win-header span { position: relative; z-index: 2; background: #000; padding: 0 10px; flex: 1; text-align: center; font-size: 17px; }
-    .win-header.blue span { color: var(--blue); }
-    .win-header.pink span { color: var(--pink); }
+/* HERO SECTION */
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 80px 0 50px;
+}
 
-    .win-controls { display: flex; gap: 4px; z-index: 2; }
-    .win-btn { width: 14px; height: 14px; border: 2px solid #fff; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 9px; cursor: pointer; transition: 0.1s steps(2); }
-    .win-btn.close:hover { background: var(--pink); color: #000; }
-    .win-btn.min:hover { background: var(--blue); color: #000; }
+.hero-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--title);
+  font-size: 54px;
+  color: var(--dark);
+}
 
-    /* DITHER STRIPS */
-    .dither-strip {
-      width: 100%; height: 10px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect x='0' y='0' width='2' height='2' fill='white' opacity='0.35'/%3E%3Crect x='2' y='2' width='2' height='2' fill='white' opacity='0.35'/%3E%3C/svg%3E");
-    }
-    .pink-tint {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect x='0' y='0' width='2' height='2' fill='%23ffe5eb' opacity='0.5'/%3E%3Crect x='2' y='2' width='2' height='2' fill='%23ffe5eb' opacity='0.5'/%3E%3C/svg%3E");
-    }
-    .blue-tint {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect x='0' y='0' width='2' height='2' fill='%23cfedff' opacity='0.5'/%3E%3Crect x='2' y='2' width='2' height='2' fill='%23cfedff' opacity='0.5'/%3E%3C/svg%3E");
-    }
+.hero-subtitle {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--dark);
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
 
-    /* PROFILE & AVATAR (Atualizado para suportar imagem real) */
-    .profile-section { display: flex; align-items: center; gap: 18px; padding: 22px 22px 10px; }
-    
-    .avatar-pixel {
-      width: 72px; height: 72px; border: 2px solid #fff;
-      display: flex; align-items: center; justify-content: center;
-      background: #050505; flex-shrink: 0; overflow: hidden;
-    }
-    .avatar-pixel img {
-      width: 100%; height: 100%; object-fit: cover;
-    }
+.hero-mini {
+  background: var(--white);
+  display: inline-block;
+  padding: 6px 16px;
+  border: 2px solid var(--win-border);
+  box-shadow: 4px 4px 0px var(--win-border);
+  font-size: 22px;
+  color: var(--dark);
+}
 
-    .profile-name { font-size: 38px; line-height: 1; color: var(--pink); }
-    .profile-role { margin-top: 4px; margin-bottom: 8px; font-size: 10px; letter-spacing: 3px; color: var(--blue); font-family: var(--sans); }
-    .profile-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.boot-line {
+  margin-top: 20px;
+  color: var(--gray);
+  font-size: 20px;
+}
 
-    .tag { font-size: 14px; border: 1px dashed rgba(255, 255, 255, 0.4); padding: 1px 6px; color: #fff; }
-    .tag.t-pink { color: var(--pink); border-color: var(--pink); }
-    .tag.t-blue { color: var(--blue); border-color: var(--blue); }
+.boot-blink {
+  animation: bootBlink 5s infinite steps(2);
+}
 
-    .intro { padding: 10px 22px 22px; font-size: 24px; color: #fff; }
+@keyframes bootBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
 
-    /* ALERT */
-    .alert-box { margin: 0 22px 22px; border: 2px solid #fff; }
-    .alert-header { background: #fff; color: #000; padding: 4px 8px; font-size: 16px; }
-    .alert-body { padding: 12px 14px; font-size: 20px; color: var(--pink); }
+/* JANELAS ESTILO OS RETRO */
+.win-box, .radio-box {
+  margin-bottom: 40px;
+  background: var(--win-bg);
+  border: 3px solid var(--win-border);
+  box-shadow: 8px 8px 0px var(--win-border);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.3s steps(4), transform 0.3s steps(4);
+}
 
-    /* STATUS BAR */
-    .status-box { padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-    .status-text { font-size: 22px; }
-    .loading { width: 220px; height: 18px; border: 2px solid #fff; padding: 2px; }
-    .loading-fill { height: 100%; width: 74%; background: var(--white); animation: loadmove 5s infinite linear; }
+.win-box.show, .radio-box.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    @keyframes loadmove { 0% { width: 20%; } 50% { width: 74%; } 100% { width: 20%; } }
+.win-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 3px solid var(--win-border);
+  background: var(--purple);
+}
 
-    /* MENU GRID */
-    .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: #fff; }
-    .nav-item { background: #000; padding: 26px 14px; text-decoration: none; color: #fff; text-align: center; transition: 0.1s steps(2); }
-    .nav-item:hover { background: #fff; color: #000; animation: glitch 0.2s steps(2) infinite; }
-    .nav-title { font-size: 30px; color: var(--pink); }
-    .nav-sub { margin-top: 6px; font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.45); text-transform: uppercase; font-family: var(--sans); }
-    .nav-item:hover .nav-sub, .nav-item:hover .nav-title { color: #000; }
+.win-header.blue { background: var(--blue); }
+.win-header.pink { background: var(--pink); }
 
-    @keyframes glitch {
-      0% { transform: translate(0); } 25% { transform: translate(2px,-1px); }
-      50% { transform: translate(-2px,1px); } 75% { transform: translate(1px,2px); }
-      100% { transform: translate(0); }
-    }
+.win-header span {
+  font-family: var(--title);
+  font-size: 14px;
+  color: var(--win-border);
+}
 
-    /* SERVICES */
-    .service-card { padding: 22px; border-bottom: 2px dashed rgba(255,255,255,0.25); }
-    .service-card:last-child { border-bottom: none; }
-    .service-number { color: rgba(255,255,255,0.25); font-size: 14px; letter-spacing: 2px; margin-bottom: 4px; }
-    .service-name { color: var(--blue); font-size: 30px; }
-    .service-desc { margin-top: 8px; color: rgba(255,255,255,0.72); font-size: 12px; line-height: 1.7; font-family: var(--sans); }
-    .service-link { display: inline-block; margin-top: 14px; padding: 4px 14px; border: 2px solid var(--pink); color: var(--pink); text-decoration: none; font-size: 18px; transition: 0.1s steps(2); }
-    .service-link:hover { background: var(--pink); color: #000; }
+.win-controls {
+  display: flex;
+  gap: 4px;
+}
 
-    /* RADIO PLAYER */
-    .radio-body { padding: 18px 20px 20px; }
-    .track-display { border: 2px solid #fff; padding: 12px; background: #050505; margin-bottom: 14px; overflow: hidden; }
-    .track-container { overflow: hidden; white-space: nowrap; }
-    .track-name { display: inline-block; padding-left: 100%; animation: marquee 14s linear infinite; font-size: 22px; }
+.win-btn {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--win-border);
+  background: var(--white);
+  color: var(--win-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-family: monospace;
+  cursor: pointer;
+  box-shadow: 1px 1px 0px var(--win-border);
+}
 
-    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+.win-btn:active {
+  box-shadow: 0px 0px 0px;
+  transform: translate(1px, 1px);
+}
 
-    .track-meta { display: flex; justify-content: space-between; margin-top: 6px; }
-    .track-time { color: var(--blue); font-size: 16px; }
-    .track-status { color: var(--pink); font-size: 16px; }
-    .progress-wrap { height: 14px; border: 2px solid #fff; padding: 2px; margin-bottom: 14px; cursor: pointer; }
-    .progress-fill { height: 100%; width: 0%; background: #fff; position: relative; }
-    .progress-fill::after { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 4px; background: var(--pink); }
+.win-content {
+  padding: 22px;
+}
 
-    .radio-controls { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-    .ctrl-btns { display: flex; gap: 4px; }
-    .ctrl-btn { width: 36px; height: 30px; border: 2px solid #fff; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; transition: 0.1s steps(2); }
-    .ctrl-btn:hover { background: #fff; color: #000; }
-    .ctrl-btn.play { width: 44px; background: #fff; color: #000; }
-    .ctrl-btn.play:hover { background: var(--pink); }
+/* PROFILE SECTION */
+.profile-section {
+  display: flex;
+  gap: 24px;
+  padding-bottom: 18px;
+  flex-wrap: nowrap; /* CORRIGIDO: Impede que o texto caia para baixo da foto */
+  align-items: center;
+}
 
-    .playlist-links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; padding-top: 14px; border-top: 2px dashed rgba(255,255,255,0.25); }
-    .playlist-link { text-decoration: none; color: #fff; border: 2px solid rgba(255,255,255,0.3); padding: 6px 12px; font-size: 17px; transition: 0.1s steps(2); }
-    .playlist-link:hover { background: #fff; color: #000; }
+.avatar-pixel {
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0; /* Impede a foto de encolher em ecrãs pequenos */
+  border: 3px solid var(--win-border);
+  background: var(--pink-soft);
+  box-shadow: 4px 4px 0px var(--win-border);
+  overflow: hidden;
+}
 
-    /* FOOTER */
-    .footer { margin-top: 60px; padding: 40px 0; border-top: 2px solid #fff; text-align: center; }
-    .footer-logo { color: var(--pink); font-size: 34px; }
-    .footer-copy { margin-top: 10px; color: rgba(255,255,255,0.3); font-size: 10px; letter-spacing: 4px; font-family: var(--sans); }
-    .footer-status { display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--blue); margin-top: 18px; }
-    .footer-dither {
-      width: 100%; height: 6px; margin-bottom: 20px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='6'%3E%3Crect x='0' y='0' width='2' height='2' fill='%23ffe5eb' opacity='0.3'/%3E%3Crect x='4' y='2' width='2' height='2' fill='%23cfedff' opacity='0.3'/%3E%3Crect x='2' y='4' width='2' height='2' fill='%23ffe5eb' opacity='0.2'/%3E%3Crect x='6' y='0' width='2' height='2' fill='%23cfedff' opacity='0.2'/%3E%3C/svg%3E");
-    }
+.avatar-pixel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-    /* RESPONSIVIDADE */
-    @media(max-width:600px){
-      .container { padding: 12px; }
-      .topbar-nav { display: none; }
-      .hero-title { font-size: 34px; }
-      .intro { font-size: 21px; }
-      .nav-grid { grid-template-columns: 1fr; }
-      .nav-title { font-size: 24px; }
-      .win-header::before { display: none; }
-    }
-  </style>
+.profile-info-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.profile-name {
+  font-size: 44px;
+  line-height: 1;
+  color: var(--pink);
+  font-weight: bold;
+}
+
+.profile-role {
+  color: var(--gray);
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-family: var(--sans);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.profile-direct-link {
+  font-size: 20px;
+  color: var(--dark);
+  width: fit-content;
+  display: block;
+}
+
+.profile-direct-link:hover {
+  text-decoration: underline;
+  color: var(--purple);
+}
+
+.intro {
+  font-size: 22px;
+  font-family: var(--pixel);
+  font-weight: 500;
+  margin-bottom: 20px;
+  background: var(--blue-soft);
+  padding: 14px;
+  border: 2px dashed var(--win-border);
+  line-height: 1.5;
+}
+
+/* SYSTEM ALERT BOX */
+.alert-box {
+  border: 3px solid var(--win-border);
+  background: var(--yellow);
+  box-shadow: 4px 4px 0px var(--win-border);
+}
+
+.alert-header {
+  background: var(--win-border);
+  color: var(--white);
+  padding: 4px 8px;
+  font-size: 16px;
+}
+
+.alert-body {
+  padding: 12px;
+  font-family: var(--pixel);
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+/* SERVICES CARD */
+.service-card {
+  padding: 22px 10px;
+  border-bottom: 2px dashed var(--win-border);
+}
+
+.service-card:last-child {
+  border-bottom: none;
+}
+
+.service-number {
+  color: var(--gray);
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.service-name {
+  font-size: 36px;
+  color: var(--dark);
+}
+
+.service-desc {
+  margin: 8px 0 16px;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.service-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.service-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  font-size: 20px;
+  border: 2px solid var(--win-border);
+  background: var(--white);
+  box-shadow: 3px 3px 0px var(--win-border);
+  color: var(--dark);
+  transition: 0.1s steps(2);
+}
+
+.service-btn:hover {
+  background: var(--pink-soft);
+  box-shadow: 1px 1px 0px var(--win-border);
+  transform: translate(2px, 2px);
+}
+
+.service-btn.quote {
+  background: var(--yellow);
+}
+
+/* LOADING PROGRESS LINE */
+.free-status-line {
+  margin: 36px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--white);
+  padding: 12px;
+  border: 3px solid var(--win-border);
+  box-shadow: 6px 6px 0px var(--win-border);
+}
+
+.free-status-text {
+  font-size: 20px;
+}
+
+.free-loading {
+  width: 150px;
+  height: 16px;
+  border: 2px solid var(--win-border);
+  background: var(--white);
+  padding: 2px;
+}
+
+.free-loading-fill {
+  height: 100%;
+  width: 74%;
+  background: var(--pink);
+  animation: loadmove 4s linear infinite alternate;
+}
+
+@keyframes loadmove {
+  0% { width: 15%; }
+  100% { width: 85%; }
+}
+
+/* HARMONIC RADIO & INSPIRATION */
+.inspo-pinterest-section {
+  padding: 20px;
+  border-bottom: 2px dashed var(--win-border);
+}
+
+.inspo-desc-text { 
+  font-size: 26px;
+  margin-bottom: 12px; 
+}
+
+.inspo-window-link {
+  display: inline-block;
+  padding: 6px 18px;
+  font-size: 22px;
+  background: var(--blue);
+  border: 2px solid var(--win-border);
+  box-shadow: 3px 3px 0px var(--win-border);
+  transition: 0.1s steps(2);
+}
+.inspo-window-link:hover {
+  background: var(--white);
+}
+
+.inspo-radio-section {
+  padding: 22px;
+  background: var(--pink-soft);
+}
+
+.track-display {
+  border: 2px solid var(--win-border);
+  background: var(--white);
+  color: var(--dark);
+  padding: 12px;
+}
+
+.track-container {
+  overflow: hidden;
+  white-space: nowrap;
+  border-bottom: 1px dashed var(--win-border);
+  padding-bottom: 4px;
+}
+
+.track-name {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 14s linear infinite;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.track-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.track-time {
+  font-size: 19px;
+  font-variant-numeric: tabular-nums;
+  color: var(--dark);
+}
+
+.track-status {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--purple);
+}
+
+.progress-wrap {
+  height: 14px;
+  border: 2px solid var(--win-border);
+  background: var(--white);
+  margin: 14px 0;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--purple);
+}
+
+.radio-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ctrl-btn.play, .radio-spotify-btn {
+  border: 2px solid var(--win-border);
+  background: var(--white);
+  padding: 6px 16px;
+  font-family: var(--pixel);
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px var(--win-border);
+  display: inline-flex;
+  align-items: center;
+  transition: 0.1s steps(2);
+}
+
+.ctrl-btn.play:hover { background: var(--yellow); }
+.radio-spotify-btn:hover { background: var(--blue); }
+
+.radio-brand {
+  color: var(--gray);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* FINAL CTA */
+.final-cta-section {
+  text-align: center;
+  padding: 50px 20px;
+  background: var(--white);
+  border: 3px solid var(--win-border);
+  box-shadow: 8px 8px 0px var(--win-border);
+  margin: 44px 0;
+}
+
+.final-cta-title {
+  font-family: var(--title);
+  font-size: 34px;
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+
+.final-cta-btn {
+  display: inline-block;
+  padding: 10px 28px;
+  font-size: 26px;
+  font-weight: bold;
+  background: var(--pink);
+  border: 2px solid var(--win-border);
+  box-shadow: 4px 4px 0px var(--win-border);
+  color: var(--dark);
+  transition: 0.1s steps(2);
+}
+
+.final-cta-btn:hover {
+  background: var(--purple);
+  box-shadow: 2px 2px 0px var(--win-border);
+  transform: translate(2px, 2px);
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 40px;
+  padding: 28px 0;
+  border-top: 3px solid var(--win-border);
+  text-align: center;
+  background: var(--white);
+}
+
+.footer-logo {
+  font-family: var(--title);
+  font-size: 20px;
+}
+
+.footer-copy {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 6px;
+}
+
+/* RESPONSIVIDADE E FONTES PARA TELEMÓVEL */
+@media(max-width: 700px) {
+  .topbar-nav { display: none; }
+  
+  /* Fontes do Topo e Hero */
+  .system-status { font-size: 18px; }
+  .hero-title { font-size: 32px; }
+  .hero-subtitle { font-size: 11px; }
+  .hero-mini { font-size: 18px; }
+  .boot-line { font-size: 16px; }
+  
+  /* Mantém Foto e Texto Lado a Lado de Forma Fluida */
+  .profile-section { flex-wrap: nowrap; justify-content: flex-start; text-align: left; gap: 14px; }
+  .profile-info-block { align-items: flex-start; }
+  .profile-name { font-size: 28px; } /* Reduzido para caber bem no ecrã mobile */
+  .profile-role { font-size: 11px; }
+  .profile-direct-link { font-size: 16px; }
+  
+  /* Caixas de Texto Gerais */
+  .intro { font-size: 18px; padding: 10px; }
+  .alert-body { font-size: 16px; }
+  
+  /* Serviços */
+  .service-name { font-size: 28px; }
+  .service-desc { font-size: 13px; }
+  .service-actions { flex-direction: column; gap: 8px; }
+  .service-btn { font-size: 18px; justify-content: center; width: 100%; }
+  
+  /* Status Bar e Rádio */
+  .free-status-text { font-size: 16px; }
+  .inspo-desc-text { font-size: 22px; }
+  .inspo-window-link { font-size: 18px; }
+  .track-name { font-size: 20px; }
+  .track-time { font-size: 16px; }
+  .track-status { font-size: 16px; }
+  .ctrl-btn.play, .radio-spotify-btn { font-size: 18px; justify-content: center; width: 100%; }
+  .radio-controls { flex-direction: column; align-items: stretch; text-align: center; }
+  .radio-brand { margin-top: 4px; font-size: 16px; }
+  
+  /* CTA Final e Rodapé */
+  .final-cta-title { font-size: 24px; }
+  .final-cta-btn { font-size: 20px; width: 100%; text-align: center; }
+  .footer-logo { font-size: 18px; }
+  .footer-copy { font-size: 11px; }
+}
+
+</style>
 </head>
 
 <body>
 
-  <audio id="audioTrack" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="metadata"></audio>
+<audio id="audioTrack" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="metadata"></audio>
 
-  <div class="sparkle sp-pink" style="top:15%; left:8%; font-size:18px;">★</div>
-  <div class="sparkle sp-blue" style="top:48%; right:10%; font-size:16px;">✦</div>
-  <div class="sparkle sp-pink" style="top:72%; left:12%; font-size:16px;">★</div>
-  <div class="sparkle sp-blue" style="top:88%; right:14%; font-size:14px;">✦</div>
+<header class="topbar">
+  <div class="topbar-logo">[ glossyframe ]</div>
+  <nav class="topbar-nav">
+    <a href="#profile">profile</a>
+    <a href="#services">serviços</a>
+    <a href="#inspo">inspo</a>
+  </nav>
+  <div class="system-status">
+    <div id="clock">00:00:00</div>
+  </div>
+</header>
 
-  <header class="topbar">
-    <div class="topbar-logo">[ glossyframe ]</div>
-    <nav class="topbar-nav">
-      <a href="#profile">portfolio</a>
-      <a href="#services">serviços</a>
-      <a href="#radio">radio</a>
-    </nav>
-    <div class="system-status">
-      <div id="clock">00:00:00</div>
+<div class="container">
+
+  <section class="hero">
+    <h1 class="hero-title">glossyframe ★</h1>
+    <p class="hero-subtitle">design & direção criativa</p>
+    <div class="hero-mini">for dreamy brands</div>
+    <div class="boot-line"><span class="boot-blink">visual world initialized successfully...</span></div>
+    
+    <div class="pixel-cat" id="retroCat">
+      <svg width="52" height="44" viewBox="0 0 13 11" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated">
+        <rect x="1" y="3" width="10" height="7" fill="#f5f0ff"/>
+        <rect x="1" y="1" width="2" height="3" fill="#f5f0ff"/>
+        <rect x="9" y="1" width="2" height="3" fill="#f5f0ff"/>
+        <rect x="2" y="5" width="2" height="1" fill="#333"/>
+        <rect x="8" y="5" width="2" height="1" fill="#333"/>
+        <rect x="5" y="6" width="2" height="1" fill="#ff6eb4"/>
+        <rect x="4" y="7" width="4" height="1" fill="#333"/>
+        <rect x="11" y="7" width="1" height="3" fill="#f5f0ff"/>
+        <rect x="2" y="5" width="1" height="1" fill="#ffb3d9"/>
+        <rect x="9" y="5" width="1" height="1" fill="#ffb3d9"/>
+      </svg>
     </div>
-  </header>
+  </section>
 
-  <div class="container">
+  <section class="win-box" id="profile">
+    <div class="win-header blue">
+      <span>profile_info.txt</span>
+      <div class="win-controls">
+        <button class="win-btn">_</button>
+        <button class="win-btn">X</button>
+      </div>
+    </div>
+    <div class="win-content">
+      <div class="profile-section">
+        <div class="avatar-pixel">
+          <img src="EBB7DC0B-D9F6-4975-A29E-69D90DBC7DEE.jpeg" alt="Foto de Perfil">
+        </div>
+        <div class="profile-info-block">
+          <div class="profile-name">giovanna</div>
+          <div class="profile-role">graphic designer</div>
+          <a href="mailto:hello@glossyframe.com" class="profile-direct-link">hello@glossyframe.com ↗</a>
+          <a href="https://www.instagram.com/byglossyframe" target="_blank" rel="noopener" class="profile-direct-link">@byglossyframe ↗</a> 
+          <a href="https://www.behance.net/giovannafurlam" target="_blank" rel="noopener" class="profile-direct-link">portfolio ↗</a>
+        </div>
+      </div>
+      <p class="intro">oi, eu sou a giovanna! crio universos visuais inspirados em aesthetics, cultura da internet e direção criativa.</p>
+      <div class="alert-box">
+        <div class="alert-header">⚠ system_message.exe</div>
+        <div class="alert-body">atualmente disponível para novos projetos</div>
+      </div>
+    </div>
+  </section>
 
-    <section class="hero">
-      <h1 class="hero-title">glossyframe <span class="hero-star">★</span></h1>
-      <p class="hero-subtitle">design & direção criativa</p>
-      <div class="hero-mini">✦ for dreamy brands ✦</div>
-      <div class="boot-line">glossyframe initialized...</div>
-    </section>
+  <section class="win-box" id="services">
+    <div class="win-header pink">
+      <span>services_list.log</span>
+      <div class="win-controls">
+        <button class="win-btn">_</button>
+        <button class="win-btn">X</button>
+      </div>
+    </div>
+    <div class="win-content">
+      <div class="service-card">
+        <div class="service-number">01 //</div>
+        <div class="service-name">visual universe ✦</div>
+        <div class="service-desc">direção visual, identidade estética e construção de atmosfera digital para marcas criativas e projetos autorais.</div>
+        <div class="service-actions">
+          <a href="pagina-servico-1.html" class="service-btn">ver mais ↗</a>
+          <a href="link-do-seu-briefing-1" class="service-btn quote" target="_blank" rel="noopener">orçamento ↗</a>
+        </div>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-number">02 //</div>
+        <div class="service-name">social media design ✦</div>
+        <div class="service-desc">posts, carrosséis e conteúdo visual com narrativa estética e linguagem visual consistente para redes sociais.</div>
+        <div class="service-actions">
+          <a href="pagina-servico-2.html" class="service-btn">ver mais ↗</a>
+          <a href="link-do-seu-briefing-2" class="service-btn quote" target="_blank" rel="noopener">orçamento ↗</a>
+        </div>
+      </div>
 
-    <section class="win-box" id="profile">
-      <div class="win-header blue">
-        <div class="win-controls">
-          <button class="win-btn close" aria-label="Fechar janela">x</button>
-          <button class="win-btn min" aria-label="Minimizar janela">_</button>
-        </div>
-        <span>profile_info.txt</span>
-        <div style="width:28px;"></div>
-      </div>
-      <div class="dither-strip blue-tint"></div>
-      <div class="win-content">
-        <div class="profile-section">
-          <div class="avatar-pixel">
-            <img src="EBB7DC0B-D9F6-4975-A29E-69D90DBC7DEE.jpeg" alt="Foto de Giovanna Furłam">
-          </div>
-          <div>
-            <div class="profile-name">giovanna</div>
-            <div class="profile-role">GRAPHIC DESIGNER</div>
-            <div class="profile-tags">
-              <span class="tag t-pink">aesthetic</span>
-              <span class="tag t-blue">visual</span>
-              <span class="tag">internet culture</span>
-            </div>
-          </div>
-        </div>
-        <p class="intro">oi, eu sou a giovanna! crio universos visuais inspirados em cultura da internet, estética retrô digital, direção criativa e identidade visual autoral.</p>
-        <div class="alert-box">
-          <div class="alert-header">⚠︎ system message</div>
-          <div class="alert-body">atualmente disponível para projetos.</div>
+      <div class="service-card">
+        <div class="service-number">03 //</div>
+        <div class="service-name">creative graphics ✦</div>
+        <div class="service-desc">posters, flyers, capas e peças digitais inspiradas em cultura visual online.</div>
+        <div class="service-actions">
+          <a href="pagina-servico-3.html" class="service-btn">ver mais ↗</a>
+          <a href="link-do-seu-briefing-3" class="service-btn quote" target="_blank" rel="noopener">orçamento ↗</a>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="win-box" id="menu">
-      <div class="win-header blue">
-        <div class="win-controls">
-          <button class="win-btn close" aria-label="Fechar janela">x</button>
-          <button class="win-btn min" aria-label="Minimizar janela">_</button>
-        </div>
-        <span>menu_index.exe</span>
-        <div style="width:28px;"></div>
-      </div>
-      <div class="win-content">
-        <div class="nav-grid">
-          <a href="https://www.behance.net/giovannafurlam" class="nav-item" target="_blank" rel="noopener">
-            <span class="nav-title">portfolio</span>
-            <span class="nav-sub">recent work</span>
-          </a>
-          <a href="https://pin.it/1YmMSFZ1r" class="nav-item" target="_blank" rel="noopener">
-            <span class="nav-title">pinterest</span>
-            <span class="nav-sub">moodboards</span>
-          </a>
-          <a href="#services" class="nav-item">
-            <span class="nav-title">orçamento</span>
-            <span class="nav-sub">work with me</span>
-          </a>
-          <a href="mailto:hello@glossyframe.com" class="nav-item">
-            <span class="nav-title">contato</span>
-            <span class="nav-sub">say hello</span>
-          </a>
-        </div>
-      </div>
-    </section>
+  <div class="free-status-line">
+    <span class="free-status-text">creative system active...</span>
+    <div class="free-loading">
+      <div class="free-loading-fill"></div>
+    </div>
+  </div>
 
-    <section class="win-box" id="status">
-      <div class="win-header pink">
-        <div class="win-controls">
-          <button class="win-btn close" aria-label="Fechar janela">x</button>
-          <button class="win-btn min" aria-label="Minimizar janela">_</button>
-        </div>
-        <span>core_status.sys</span>
-        <div style="width:28px;"></div>
+  <section class="radio-box" id="inspo">
+    <div class="win-header">
+      <span>glossy_inspo.exe</span>
+      <div class="win-controls">
+        <button class="win-btn">_</button>
+        <button class="win-btn">X</button>
       </div>
-      <div class="dither-strip pink-tint"></div>
-      <div class="win-content">
-        <div class="status-box">
-          <div class="status-text">creative system online...</div>
-          <div class="loading">
-            <div class="loading-fill"></div>
-          </div>
-        </div>
+    </div>
+    <div class="win-content">
+      <div class="inspo-pinterest-section">
+        <p class="inspo-desc-text">moodboards & refs ✦</p>
+        <a href="https://pin.it/1YmMSFZ1r" class="inspo-window-link" target="_blank" rel="noopener">pinterest ↗</a>
       </div>
-    </section>
+      
+      <div class="inspo-radio-section">
 
-    <section class="win-box" id="services">
-      <div class="win-header">
-        <div class="win-controls">
-          <button class="win-btn close" aria-label="Fechar janela">x</button>
-          <button class="win-btn min" aria-label="Minimizar janela">_</button>
-        </div>
-        <span>services_list.log</span>
-        <div style="width:28px;"></div>
-      </div>
-      <div class="win-content">
-        <div class="service-card">
-          <div class="service-number">01 //</div>
-          <div class="service-name">visual universe ✦</div>
-          <div class="service-desc">direção visual, identidade estética e construção de atmosfera digital para marcas criativas e projetos autorais.</div>
-          <a href="https://www.behance.net/giovannafurlam" class="service-link" target="_blank" rel="noopener">open</a>
-        </div>
-        <div class="service-card">
-          <div class="service-number">02 //</div>
-          <div class="service-name">social media design ✦</div>
-          <div class="service-desc">posts, carrosséis e conteúdo visual com narrativa estética e linguagem visual consistente para redes sociais.</div>
-          <a href="https://www.behance.net/giovannafurlam" class="service-link" target="_blank" rel="noopener">open</a>
-        </div>
-        <div class="service-card">
-          <div class="service-number">03 //</div>
-          <div class="service-name">creative graphics ✦</div>
-          <div class="service-desc">posters, flyers, capas e peças digitais inspiradas em cultura visual online e estética retrô.</div>
-          <a href="https://www.behance.net/giovannafurlam" class="service-link" target="_blank" rel="noopener">open</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="radio-box" id="radio">
-      <div class="win-header pink">
-        <div class="win-controls">
-          <button class="win-btn close" aria-label="Fechar janela">x</button>
-          <button class="win-btn min" aria-label="Minimizar janela">_</button>
-        </div>
-        <span>glossy_radio.mp3</span>
-        <div style="width:28px;"></div>
-      </div>
-      <div class="dither-strip pink-tint"></div>
-      <div class="radio-body">
+        <div class="radio-brand">77.7 FM</div>
         <div class="track-display">
           <div class="track-container">
-            <div class="track-name">pastel ghost ♫ dreamy internet radio station</div>
+            <div class="track-name">♫ dreamy internet radio station</div>
           </div>
           <div class="track-meta">
-            <span class="track-time" id="trackTime">--:-- / --:--</span>
+            <span class="track-time" id="trackTime">00:00 / 00:00</span>
             <span class="track-status" id="trackStatus">■ STOPPED</span>
           </div>
         </div>
+        
         <div class="progress-wrap" id="progressContainer">
-          <div class="progress-fill" id="progressFill"></div>
+          <div class="free-loading-fill" style="width: 0%;" id="progressFill"></div>
         </div>
+        
         <div class="radio-controls">
-          <div class="ctrl-btns">
-            <button class="ctrl-btn play" id="playBtn" aria-label="Tocar ou Pausar">▶</button>
-          </div>
-          <div style="font-size:14px; color:rgba(255,255,255,0.3); font-family:var(--sans);">glossy radio 77.7</div>
-        </div>
-        <div class="playlist-links">
-          <a href="https://open.spotify.com/playlist/1iFg6w2m7AWKI9CqNIsv2I?si=hq4KQxlXTGStXyWsKVMrUg&pi=uhzzWbMlSsOO8" class="playlist-link" target="_blank" rel="noopener">spotify</a>
+          <button class="ctrl-btn play" id="playBtn">▶ PLAY</button>
+          <a href="#" class="radio-spotify-btn" target="_blank" rel="noopener">spotify ↗</a>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer class="footer">
-      <div class="footer-dither"></div>
-      <div class="footer-logo">glossyframe ★</div>
-      <div class="footer-copy">© 2026 ALL RIGHTS RESERVED</div>
-      <div class="footer-status">
-        <div class="dot"></div>
-        <span>SYSTEM RUNNING</span>
-      </div>
-    </footer>
+  <section class="final-cta-section">
+    <h2 class="final-cta-title">ready to build your own universe? ★ </h2>
+    <a href="mailto:hello@glossyframe.com?subject=vamos%20criar%20juntos!" class="final-cta-btn">vamos criar juntos ↗</a>
+  </section>
 
-  </div>
+  <footer class="footer">
+    <div class="footer-logo">glossyframe ★</div>
+    <div class="footer-copy">© 2026 ALL RIGHTS RESERVED</div>
+  </footer>
 
-  <script>
-    /* RELÓGIO */
-    function updateClock() {
-      const now = new Date();
-      const h = String(now.getHours()).padStart(2, "0");
-      const m = String(now.getMinutes()).padStart(2, "0");
-      const s = String(now.getSeconds()).padStart(2, "0");
-      document.getElementById("clock").textContent = `${h}:${m}:${s}`;
+</div>
+
+<script>
+/* CLOCK */
+function updateClock(){
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2, "0");
+  const m = String(now.getMinutes()).padStart(2, "0");
+  const s = String(now.getSeconds()).padStart(2, "0");
+  document.getElementById("clock").textContent = `${h}:${m}:${s}`;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+/* REVEAL ON SCROLL */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if(entry.isIntersecting){ entry.target.classList.add("show"); }
+  });
+}, { threshold: 0.05 });
+
+document.querySelectorAll(".win-box, .radio-box").forEach((box) => observer.observe(box));
+
+/* CONTROLO DE ÁUDIO */
+const audio = document.getElementById("audioTrack");
+const playBtn = document.getElementById("playBtn");
+const trackTime = document.getElementById("trackTime");
+const trackStatus = document.getElementById("trackStatus");
+const progressFill = document.getElementById("progressFill");
+const progressContainer = document.getElementById("progressContainer");
+let isPlaying = false;
+
+function formatTime(secs){
+  if(isNaN(secs) || !isFinite(secs)) return "00:00";
+  const m = String(Math.floor(secs / 60)).padStart(2, "0");
+  const s = String(Math.floor(secs % 60)).padStart(2, "0");
+  return `${m}:${s}`;
+}
+
+function initTrackTime() {
+  trackTime.textContent = `00:00 / ${formatTime(audio.duration)}`;
+}
+audio.addEventListener("loadedmetadata", initTrackTime);
+if (audio.readyState >= 1) { initTrackTime(); }
+
+playBtn.addEventListener("click", () => {
+  if(isPlaying){
+    audio.pause();
+    playBtn.textContent = "▶ PLAY";
+    trackStatus.textContent = "ⅠⅠ PAUSED";
+    isPlaying = false;
+  } else {
+    trackStatus.textContent = "⌛ LOADING";
+    audio.play()
+      .then(() => {
+        playBtn.textContent = "ⅠⅠ PAUSE";
+        trackStatus.textContent = "▶ PLAYING";
+        isPlaying = true;
+      })
+      .catch(() => {
+        trackStatus.textContent = "⚠ ERROR";
+        playBtn.textContent = "▶ PLAY";
+      });
+  }
+});
+
+audio.addEventListener("timeupdate", () => {
+  const current = audio.currentTime;
+  const duration = audio.duration || 0;
+  trackTime.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
+  if(duration > 0){
+    progressFill.style.width = `${(current / duration) * 100}%`;
+  }
+});
+
+progressContainer.addEventListener("click", (e) => {
+  const rect = progressContainer.getBoundingClientRect();
+  const clickX = e.clientX - rect.left;
+  const duration = audio.duration;
+  if(duration){
+    audio.currentTime = (clickX / rect.width) * duration;
+  }
+});
+
+/* INTERATIVIDADE DO GATO (CORRIGIDA DEFINITIVAMENTE PARA MÓVEIS/IOS) */
+const cat = document.getElementById("retroCat");
+let audioCtx = null;
+
+function playRetroMeow() {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    
+    if (!audioCtx) {
+      audioCtx = new AudioContext();
     }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    /* INTERSECTION OBSERVER */
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) { e.target.classList.add("show"); }
-      });
-    }, { threshold: 0.05 });
-
-    document.querySelectorAll(".win-box, .radio-box").forEach((b) => observer.observe(b));
-
-    /* CONTROLOS DE JANELAS */
-    document.querySelectorAll(".win-header").forEach(header => {
-      const box = header.closest(".win-box, .radio-box");
-
-      header.querySelector(".win-btn.close").addEventListener("click", (e) => {
-        e.stopPropagation();
-        box.classList.add("closed");
-      });
-
-      header.querySelector(".win-btn.min").addEventListener("click", (e) => {
-        e.stopPropagation();
-        box.classList.toggle("minimized");
-      });
-    });
-
-    // Reabrir se clicar num link âncora interno
-    document.querySelectorAll('.topbar-nav a, .nav-item').forEach(link => {
-      link.addEventListener('click', () => {
-        const targetId = link.getAttribute('href');
-        if(targetId && targetId.startsWith('#')) {
-          const targetBox = document.querySelector(targetId);
-          if(targetBox) { targetBox.classList.remove('closed', 'minimized'); }
-        }
-      });
-    });
-
-    /* SPARKLES ANIMAÇÃO */
-    document.querySelectorAll(".sparkle").forEach((sparkle) => {
-      setInterval(() => {
-        const x = (Math.random() * 8) - 4;
-        const y = (Math.random() * 8) - 4;
-        sparkle.style.transform = `translate(${x}px, ${y}px)`;
-      }, 1500);
-    });
-
-    /* AUDIO PLAYER */
-    const audio = document.getElementById("audioTrack");
-    const playBtn = document.getElementById("playBtn");
-    const trackTime = document.getElementById("trackTime");
-    const trackStatus = document.getElementById("trackStatus");
-    const progressFill = document.getElementById("progressFill");
-    const progressContainer = document.getElementById("progressContainer");
-    let isPlaying = false;
-
-    function formatTime(secs) {
-      if (isNaN(secs) || !isFinite(secs)) return "00:00";
-      const m = String(Math.floor(secs / 60)).padStart(2, "0");
-      const s = String(Math.floor(secs % 60)).padStart(2, "0");
-      return `${m}:${s}`;
+    
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
     }
+    
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    osc.type = 'triangle';
+    
+    const now = audioCtx.currentTime;
+    osc.frequency.setValueAtTime(550, now);
+    osc.frequency.exponentialRampToValueAtTime(850, now + 0.08);
+    osc.frequency.exponentialRampToValueAtTime(600, now + 0.25);
+    
+    gain.gain.setValueAtTime(0.15, now);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+    
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    osc.start(now);
+    osc.stop(now + 0.25);
+  } catch (error) {
+    console.log("AudioContext falhou:", error);
+  }
+}
 
-    audio.addEventListener("loadedmetadata", () => {
-      trackTime.textContent = `00:00 / ${formatTime(audio.duration)}`;
-    });
-
-    playBtn.addEventListener("click", () => {
-      if (isPlaying) {
-        audio.pause();
-        playBtn.textContent = "▶";
-        trackStatus.textContent = "ⅠⅠ PAUSED";
-        isPlaying = false;
-      } else {
-        audio.play().then(() => {
-          playBtn.textContent = "ⅠⅠ";
-          trackStatus.textContent = "▶ PLAYING";
-          isPlaying = true;
-        }).catch(() => console.log("Interação necessária para áudio."));
-      }
-    });
-
-    audio.addEventListener("timeupdate", () => {
-      const current = audio.currentTime;
-      const duration = audio.duration || 0;
-      trackTime.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
-      if(duration > 0) {
-        const percentage = (current / duration) * 100;
-        progressFill.style.width = `${percentage}%`;
-      }
-    });
-
-    progressContainer.addEventListener("click", (e) => {
-      const rect = progressContainer.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const width = rect.width;
-      const duration = audio.duration;
-      if (duration) { audio.currentTime = (clickX / width) * duration; }
-    });
-
-    audio.addEventListener("ended", () => {
-      playBtn.textContent = "▶";
-      trackStatus.textContent = "■ ENDED";
-      isPlaying = false;
-      progressFill.style.width = "0%";
-    });
-  </script>
+// Escuta múltiplos eventos para contornar restrições mobile estritas
+['click', 'touchstart'].forEach(eventType => {
+  cat.addEventListener(eventType, (e) => {
+    // Impede comportamentos duplicados se disparar ambos os eventos
+    if(e.type === 'touchstart') e.preventDefault(); 
+    
+    playRetroMeow();
+    cat.classList.add("cat-jump");
+    setTimeout(() => {
+      cat.classList.remove("cat-jump");
+    }, 400);
+  }, { passive: false });
+});
+</script>
 
 </body>
 </html>
