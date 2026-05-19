@@ -1,1014 +1,1073 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<title>glossyframe ★ design & direção criativa</title>
-
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
-
-<style>
-
-:root {
-  /* Paleta Pastel Baseada no teu Tema */
-  --bg-purple: #e2daf1;
-  --win-bg: #ffffff;
-  --win-border: #000000;
-  
-  --pink: #ffc2d4;
-  --pink-soft: #ffe5ec;
-  --blue: #b3e5fc;
-  --blue-soft: #e1f5fe;
-  --yellow: #ffe082;
-  --purple: #b39ddb;
-  
-  --dark: #212121;
-  --white: #ffffff;
-  --gray: #8e8e8e;
-
-  --pixel: 'VT323', monospace;
-  --title: 'Silkscreen', cursive;
-  --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background-color: var(--bg-purple);
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.7) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 1px, transparent 1px);
-  background-size: 24px 24px;
-
-  color: var(--dark);
-  font-family: var(--pixel);
-  overflow-x: hidden;
-  line-height: 1.4;
-  padding-top: 58px;
-  -webkit-font-smoothing: none;
-  text-rendering: optimizeSpeed;
-  cursor: crosshair;
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.02),
-    rgba(0, 0, 0, 0.02) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-  pointer-events: none;
-  z-index: 9998;
-}
-
-::selection {
-  background: var(--pink);
-  color: var(--dark);
-}
-
-/* SCROLLBAR RETRO */
-::-webkit-scrollbar {
-  width: 16px;
-}
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-left: 2px solid var(--win-border);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--gray);
-  border: 2px solid var(--win-border);
-  box-shadow: inset -2px -2px 0px #555, inset 2px 2px 0px #fff;
-}
-
-/* GLOBAL CONTAINER */
-.container {
-  width: 100%;
-  max-width: 920px;
-  margin: 0 auto;
-  padding: 22px;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* TOPBAR RETRO */
-.topbar {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 42px;
-  background: var(--white);
-  border-bottom: 3px solid var(--win-border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  z-index: 5000;
-  box-shadow: 0 2px 0px rgba(0,0,0,0.1);
-}
-
-.topbar-logo {
-  font-family: var(--pixel);
-  color: var(--dark);
-  font-size: 20px;
-}
-
-.topbar-nav {
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.topbar-nav a {
-  padding: 0 14px;
-  font-size: 22px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  border-left: 2px solid var(--win-border);
-  transition: 0.1s steps(2);
-}
-
-.topbar-nav a:hover {
-  background: var(--pink);
-}
-
-.system-status {
-  font-size: 22px;
-  font-variant-numeric: tabular-nums;
-  font-weight: bold;
-}
-
-/* GATINHO FLUTUANTE */
-.pixel-cat {
-  position: fixed; 
-  bottom: 52px; 
-  right: 24px; 
-  z-index: 400; 
-  pointer-events: auto;
-  cursor: pointer;
-  animation: catfloat 2s ease-in-out infinite alternate;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.pixel-cat.cat-jump {
-  animation: catjump 0.4s ease-out;
-}
-
-@keyframes catfloat { 
-  from { transform: translateY(0); } 
-  to { transform: translateY(-10px); } 
-}
-
-@keyframes catjump {
-  0% { transform: translateY(0) scale(1, 1); }
-  50% { transform: translateY(-40px) scale(0.9, 1.1); }
-  100% { transform: translateY(0) scale(1, 1); }
-}
-
-/* HERO SECTION */
-.hero {
-  position: relative;
-  text-align: center;
-  padding: 80px 0 50px;
-}
-
-.hero-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--title);
-  font-size: 54px;
-  color: var(--dark);
-}
-
-.hero-subtitle {
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--dark);
-  margin-top: 12px;
-  margin-bottom: 16px;
-}
-
-.hero-mini {
-  background: var(--white);
-  display: inline-block;
-  padding: 6px 16px;
-  border: 2px solid var(--win-border);
-  box-shadow: 4px 4px 0px var(--win-border);
-  font-size: 22px;
-  color: var(--dark);
-}
-
-.boot-line {
-  margin-top: 20px;
-  color: var(--gray);
-  font-size: 20px;
-}
-
-.boot-blink {
-  animation: bootBlink 5s infinite steps(2);
-}
-
-@keyframes bootBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* JANELAS ESTILO OS RETRO */
-.win-box, .radio-box {
-  margin-bottom: 40px;
-  background: var(--win-bg);
-  border: 3px solid var(--win-border);
-  box-shadow: 8px 8px 0px var(--win-border);
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.3s steps(4), transform 0.3s steps(4);
-}
-
-.win-box.show, .radio-box.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.win-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-  border-bottom: 3px solid var(--win-border);
-  background: var(--purple);
-}
-
-.win-header.blue { background: var(--blue); }
-.win-header.pink { background: var(--pink); }
-
-.win-header span {
-  font-family: var(--title);
-  font-size: 14px;
-  color: var(--win-border);
-}
-
-.win-controls {
-  display: flex;
-  gap: 4px;
-}
-
-.win-btn {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--win-border);
-  background: var(--white);
-  color: var(--win-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-family: monospace;
-  cursor: pointer;
-  box-shadow: 1px 1px 0px var(--win-border);
-}
-
-.win-btn:active {
-  box-shadow: 0px 0px 0px;
-  transform: translate(1px, 1px);
-}
-
-.win-content {
-  padding: 22px;
-}
-
-/* PROFILE SECTION */
-.profile-section {
-  display: flex;
-  gap: 24px;
-  padding-bottom: 18px;
-  flex-wrap: nowrap; /* CORRIGIDO: Impede que o texto caia para baixo da foto */
-  align-items: center;
-}
-
-.avatar-pixel {
-  width: 96px;
-  height: 96px;
-  flex-shrink: 0; /* Impede a foto de encolher em ecrãs pequenos */
-  border: 3px solid var(--win-border);
-  background: var(--pink-soft);
-  box-shadow: 4px 4px 0px var(--win-border);
-  overflow: hidden;
-}
-
-.avatar-pixel img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.profile-info-block {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  align-items: flex-start;
-}
-
-.profile-name {
-  font-size: 44px;
-  line-height: 1;
-  color: var(--pink);
-  font-weight: bold;
-}
-
-.profile-role {
-  color: var(--gray);
-  font-size: 14px;
-  letter-spacing: 2px;
-  font-family: var(--sans);
-  text-transform: uppercase;
-  margin-bottom: 4px;
-}
-
-.profile-direct-link {
-  font-size: 20px;
-  color: var(--dark);
-  width: fit-content;
-  display: block;
-}
-
-.profile-direct-link:hover {
-  text-decoration: underline;
-  color: var(--purple);
-}
-
-.intro {
-  font-size: 22px;
-  font-family: var(--pixel);
-  font-weight: 500;
-  margin-bottom: 20px;
-  background: var(--blue-soft);
-  padding: 14px;
-  border: 2px dashed var(--win-border);
-  line-height: 1.5;
-}
-
-/* SYSTEM ALERT BOX */
-.alert-box {
-  border: 3px solid var(--win-border);
-  background: var(--yellow);
-  box-shadow: 4px 4px 0px var(--win-border);
-}
-
-.alert-header {
-  background: var(--win-border);
-  color: var(--white);
-  padding: 4px 8px;
-  font-size: 16px;
-}
-
-.alert-body {
-  padding: 12px;
-  font-family: var(--pixel);
-  font-size: 20px;
-  letter-spacing: 1px;
-}
-
-/* SERVICES CARD */
-.service-card {
-  padding: 22px 10px;
-  border-bottom: 2px dashed var(--win-border);
-}
-
-.service-card:last-child {
-  border-bottom: none;
-}
-
-.service-number {
-  color: var(--gray);
-  font-size: 18px;
-  margin-bottom: 4px;
-}
-
-.service-name {
-  font-size: 36px;
-  color: var(--dark);
-}
-
-.service-desc {
-  margin: 8px 0 16px;
-  font-family: var(--sans);
-  font-size: 14px;
-  color: #333;
-  line-height: 1.6;
-}
-
-.service-actions {
-  display: flex;
-  gap: 12px;
-}
-
-.service-btn {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 16px;
-  font-size: 20px;
-  border: 2px solid var(--win-border);
-  background: var(--white);
-  box-shadow: 3px 3px 0px var(--win-border);
-  color: var(--dark);
-  transition: 0.1s steps(2);
-}
-
-.service-btn:hover {
-  background: var(--pink-soft);
-  box-shadow: 1px 1px 0px var(--win-border);
-  transform: translate(2px, 2px);
-}
-
-.service-btn.quote {
-  background: var(--yellow);
-}
-
-/* LOADING PROGRESS LINE */
-.free-status-line {
-  margin: 36px auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--white);
-  padding: 12px;
-  border: 3px solid var(--win-border);
-  box-shadow: 6px 6px 0px var(--win-border);
-}
-
-.free-status-text {
-  font-size: 20px;
-}
-
-.free-loading {
-  width: 150px;
-  height: 16px;
-  border: 2px solid var(--win-border);
-  background: var(--white);
-  padding: 2px;
-}
-
-.free-loading-fill {
-  height: 100%;
-  width: 74%;
-  background: var(--pink);
-  animation: loadmove 4s linear infinite alternate;
-}
-
-@keyframes loadmove {
-  0% { width: 15%; }
-  100% { width: 85%; }
-}
-
-/* HARMONIC RADIO & INSPIRATION */
-.inspo-pinterest-section {
-  padding: 20px;
-  border-bottom: 2px dashed var(--win-border);
-}
-
-.inspo-desc-text { 
-  font-size: 26px;
-  margin-bottom: 12px; 
-}
-
-.inspo-window-link {
-  display: inline-block;
-  padding: 6px 18px;
-  font-size: 22px;
-  background: var(--blue);
-  border: 2px solid var(--win-border);
-  box-shadow: 3px 3px 0px var(--win-border);
-  transition: 0.1s steps(2);
-}
-.inspo-window-link:hover {
-  background: var(--white);
-}
-
-.inspo-radio-section {
-  padding: 22px;
-  background: var(--pink-soft);
-}
-
-.track-display {
-  border: 2px solid var(--win-border);
-  background: var(--white);
-  color: var(--dark);
-  padding: 12px;
-}
-
-.track-container {
-  overflow: hidden;
-  white-space: nowrap;
-  border-bottom: 1px dashed var(--win-border);
-  padding-bottom: 4px;
-}
-
-.track-name {
-  display: inline-block;
-  padding-left: 100%;
-  animation: marquee 14s linear infinite;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-
-.track-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 6px;
-}
-
-.track-time {
-  font-size: 19px;
-  font-variant-numeric: tabular-nums;
-  color: var(--dark);
-}
-
-.track-status {
-  font-size: 18px;
-  font-weight: bold;
-  color: var(--purple);
-}
-
-.progress-wrap {
-  height: 14px;
-  border: 2px solid var(--win-border);
-  background: var(--white);
-  margin: 14px 0;
-  cursor: pointer;
-  padding: 2px;
-}
-
-.progress-fill {
-  height: 100%;
-  width: 0%;
-  background: var(--purple);
-}
-
-.radio-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.ctrl-btn.play, .radio-spotify-btn {
-  border: 2px solid var(--win-border);
-  background: var(--white);
-  padding: 6px 16px;
-  font-family: var(--pixel);
-  font-size: 20px;
-  cursor: pointer;
-  box-shadow: 3px 3px 0px var(--win-border);
-  display: inline-flex;
-  align-items: center;
-  transition: 0.1s steps(2);
-}
-
-.ctrl-btn.play:hover { background: var(--yellow); }
-.radio-spotify-btn:hover { background: var(--blue); }
-
-.radio-brand {
-  color: var(--gray);
-  font-size: 18px;
-  font-weight: bold;
-}
-
-/* FINAL CTA */
-.final-cta-section {
-  text-align: center;
-  padding: 50px 20px;
-  background: var(--white);
-  border: 3px solid var(--win-border);
-  box-shadow: 8px 8px 0px var(--win-border);
-  margin: 44px 0;
-}
-
-.final-cta-title {
-  font-family: var(--title);
-  font-size: 34px;
-  margin-bottom: 24px;
-  line-height: 1.2;
-}
-
-.final-cta-btn {
-  display: inline-block;
-  padding: 10px 28px;
-  font-size: 26px;
-  font-weight: bold;
-  background: var(--pink);
-  border: 2px solid var(--win-border);
-  box-shadow: 4px 4px 0px var(--win-border);
-  color: var(--dark);
-  transition: 0.1s steps(2);
-}
-
-.final-cta-btn:hover {
-  background: var(--purple);
-  box-shadow: 2px 2px 0px var(--win-border);
-  transform: translate(2px, 2px);
-}
-
-/* FOOTER */
-.footer {
-  margin-top: 40px;
-  padding: 28px 0;
-  border-top: 3px solid var(--win-border);
-  text-align: center;
-  background: var(--white);
-}
-
-.footer-logo {
-  font-family: var(--title);
-  font-size: 20px;
-}
-
-.footer-copy {
-  font-family: var(--sans);
-  font-size: 12px;
-  color: var(--gray);
-  margin-top: 6px;
-}
-
-/* RESPONSIVIDADE E FONTES PARA TELEMÓVEL */
-@media(max-width: 700px) {
-  .topbar-nav { display: none; }
-  
-  /* Fontes do Topo e Hero */
-  .system-status { font-size: 18px; }
-  .hero-title { font-size: 32px; }
-  .hero-subtitle { font-size: 11px; }
-  .hero-mini { font-size: 18px; }
-  .boot-line { font-size: 16px; }
-  
-  /* Mantém Foto e Texto Lado a Lado de Forma Fluida */
-  .profile-section { flex-wrap: nowrap; justify-content: flex-start; text-align: left; gap: 14px; }
-  .profile-info-block { align-items: flex-start; }
-  .profile-name { font-size: 28px; } /* Reduzido para caber bem no ecrã mobile */
-  .profile-role { font-size: 11px; }
-  .profile-direct-link { font-size: 16px; }
-  
-  /* Caixas de Texto Gerais */
-  .intro { font-size: 18px; padding: 10px; }
-  .alert-body { font-size: 16px; }
-  
-  /* Serviços */
-  .service-name { font-size: 28px; }
-  .service-desc { font-size: 13px; }
-  .service-actions { flex-direction: column; gap: 8px; }
-  .service-btn { font-size: 18px; justify-content: center; width: 100%; }
-  
-  /* Status Bar e Rádio */
-  .free-status-text { font-size: 16px; }
-  .inspo-desc-text { font-size: 22px; }
-  .inspo-window-link { font-size: 18px; }
-  .track-name { font-size: 20px; }
-  .track-time { font-size: 16px; }
-  .track-status { font-size: 16px; }
-  .ctrl-btn.play, .radio-spotify-btn { font-size: 18px; justify-content: center; width: 100%; }
-  .radio-controls { flex-direction: column; align-items: stretch; text-align: center; }
-  .radio-brand { margin-top: 4px; font-size: 16px; }
-  
-  /* CTA Final e Rodapé */
-  .final-cta-title { font-size: 24px; }
-  .final-cta-btn { font-size: 20px; width: 100%; text-align: center; }
-  .footer-logo { font-size: 18px; }
-  .footer-copy { font-size: 11px; }
-}
-
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>glossyframe ★ design & direção criativa</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* 1. VARIÁVEIS DE CORES E FONTES */
+    :root {
+      --bg-purple: #e2daf1;
+      --win-bg: #ffffff;
+      --win-border: #000000;
+      
+      --pink: #ffc2d4;
+      --pink-soft: #ffe5ec;
+      --blue: #b3e5fc;
+      --blue-soft: #e1f5fe;
+      --yellow: #ffe082;
+      --purple: #b39ddb;
+      
+      --dark: #212121;
+      --white: #ffffff;
+      --gray: #8e8e8e;
+
+      --pixel: 'VT323', monospace;
+      --title: 'Silkscreen', cursive;
+      --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    /* 2. RESET GERAL */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-purple);
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.7) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 1px, transparent 1px);
+      background-size: 24px 24px;
+
+      color: var(--dark);
+      font-family: var(--pixel);
+      overflow-x: hidden;
+      line-height: 1.4;
+      padding-top: 58px;
+      -webkit-font-smoothing: none;
+      text-rendering: optimizeSpeed;
+      cursor: crosshair;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.02),
+        rgba(0, 0, 0, 0.02) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    ::selection {
+      background: var(--pink);
+      color: var(--dark);
+    }
+
+    /* 3. SCROLLBAR RETRO */
+    ::-webkit-scrollbar {
+      width: 16px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-left: 2px solid var(--win-border);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--gray);
+      border: 2px solid var(--win-border);
+      box-shadow: inset -2px -2px 0px #555, inset 2px 2px 0px #fff;
+    }
+
+    /* 4. LAYOUT PRINCIPAL */
+    .container {
+      width: 100%;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 22px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 5. TOPBAR RETRO */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 42px;
+      background: var(--yellow);
+      border-bottom: 3px solid var(--win-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      z-index: 5000;
+      box-shadow: 0 2px 0px rgba(0,0,0,0.1);
+    }
+
+    .topbar-logo {
+      font-family: var(--pixel);
+      color: var(--dark);
+      font-size: 20px;
+    }
+
+    .topbar-nav {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .topbar-nav a {
+      padding: 0 14px;
+      font-size: 22px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      transition: 0.1s steps(2);
+    }
+
+    .topbar-nav a:hover {
+      background: var(--white);
+    }
+
+    .system-status {
+      font-size: 22px;
+      font-variant-numeric: tabular-nums;
+      font-weight: bold;
+    }
+
+    /* 6. GATINHO FLUTUANTE */
+    .pixel-cat {
+      position: fixed; 
+      bottom: 52px; 
+      right: 24px; 
+      z-index: 400; 
+      pointer-events: auto;
+      cursor: pointer;
+      animation: catfloat 2s ease-in-out infinite alternate;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .pixel-cat.cat-jump {
+      animation: catjump 0.4s ease-out;
+    }
+
+    @keyframes catfloat { 
+      from { transform: translateY(0); } 
+      to { transform: translateY(-10px); } 
+    }
+
+    @keyframes catjump {
+      0% { transform: translateY(0) scale(1, 1); }
+      50% { transform: translateY(-40px) scale(0.9, 1.1); }
+      100% { transform: translateY(0) scale(1, 1); }
+    }
+
+    /* 7. HERO SECTION */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 80px 0 50px;
+    }
+
+    .hero-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--title);
+      font-size: 54px;
+      color: var(--dark);
+    }
+
+    .hero-subtitle {
+      font-family: var(--sans);
+      font-size: 16px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-top: 12px;
+      margin-bottom: 24px;
+    }
+
+    .hero-mini {
+      background: var(--pink-soft);
+      display: inline-block;
+      padding: 6px 16px;
+      border: 2px solid var(--win-border);
+      box-shadow: 4px 4px 0px var(--win-border);
+      font-size: 22px;
+      color: var(--dark);
+    }
+
+    .boot-line {
+      margin-top: 30px;
+      color: var(--gray);
+      font-size: 20px;
+    }
+
+    .boot-blink {
+      animation: bootBlink 2s infinite steps(2);
+    }
+
+    @keyframes bootBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* 8. ESTILOS DE JANELAS */
+    .win-box, .radio-box {
+      margin-bottom: 40px;
+      background: var(--win-bg);
+      border: 3px solid var(--win-border);
+      box-shadow: 8px 8px 0px var(--win-border);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    }
+
+    .win-box.show, .radio-box.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .win-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-bottom: 3px solid var(--win-border);
+      background: var(--purple);
+    }
+
+    .win-header.blue { background: var(--blue); }
+    .win-header.pink { background: var(--pink); }
+
+    .win-header span {
+      font-family: var(--title);
+      font-size: 14px;
+      color: var(--win-border);
+    }
+
+    .win-controls {
+      display: flex;
+      gap: 4px;
+    }
+
+    .win-btn {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--win-border);
+      background: var(--white);
+      color: var(--win-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-family: monospace;
+      cursor: pointer;
+      box-shadow: 1px 1px 0px var(--win-border);
+      transition: background 0.1s;
+    }
+
+    .win-btn:hover { background: var(--pink-soft); }
+    .win-btn:active {
+      box-shadow: 0px 0px 0px;
+      transform: translate(1px, 1px);
+    }
+
+    .win-content { padding: 22px; }
+
+    /* 9. SECÇÃO DE PERFIL */
+    .profile-section {
+      display: flex;
+      gap: 40px;
+      padding-bottom: 18px;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+
+    .avatar-pixel {
+      width: 130px;
+      height: 130px;
+      flex-shrink: 0;
+      border: 3px solid var(--win-border);
+      background: var(--pink-soft);
+      box-shadow: 4px 4px 0px var(--win-border);
+      overflow: hidden;
+    }
+
+    .avatar-pixel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-info-block {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      align-items: flex-start;
+    }
+
+    .profile-name {
+      font-size: 44px;
+      line-height: 1;
+      color: var(--pink);
+    }
+
+    .profile-role {
+      color: var(--gray);
+      font-size: 14px;
+      letter-spacing: 3px;
+      font-family: var(--sans);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .profile-direct-link {
+      font-size: 20px;
+      color: var(--gray);
+      width: fit-content;
+      display: block;
+      letter-spacing: 1px;
+    }
+
+    .profile-direct-link:hover {
+      text-decoration: underline;
+      color: var(--purple);
+    }
+
+    .intro {
+      font-size: 22px;
+      font-family: var(--pixel);
+      font-weight: 500;
+      margin-bottom: 20px;
+      background: var(--blue-soft);
+      padding: 14px;
+      border: 2px dashed var(--win-border);
+      line-height: 1.5;
+    }
+
+    /* 10. SYSTEM ALERT BOX */
+    .alert-box {
+      margin-bottom: 40px;
+      border: 3px solid var(--win-border);
+      background: var(--yellow);
+      box-shadow: 4px 4px 0px var(--win-border);
+    }
+
+    .alert-header {
+      background: var(--win-border);
+      color: var(--white);
+      padding: 4px 8px;
+      font-size: 16px;
+    }
+
+    .alert-body {
+      padding: 12px;
+      font-family: var(--pixel);
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+
+    /* 11. CARTÕES DE SERVIÇOS */
+    .service-card {
+      padding: 22px 10px;
+      border-bottom: 2px dashed var(--win-border);
+    }
+
+    .service-card:last-child { border-bottom: none; }
+
+    .service-number {
+      color: var(--gray);
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .service-name {
+      font-size: 36px;
+      color: var(--dark);
+    }
+
+    .service-desc {
+      margin: 8px 0 16px;
+      font-family: var(--sans);
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .service-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .service-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 16px;
+      font-size: 20px;
+      border: 2px solid var(--win-border);
+      background: var(--pink-soft);
+      box-shadow: 3px 3px 0px var(--win-border);
+      color: var(--dark);
+      transition: 0.1s steps(2);
+    }
+
+    .service-btn:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0px var(--win-border);
+    }
+
+    .service-btn.quote { background: var(--yellow); }
+
+    /* 12. BARRA DE CARREGAMENTO */
+    .free-status-line {
+      margin: 36px auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--white);
+      padding: 12px;
+      border: 3px solid var(--win-border);
+      box-shadow: 6px 6px 0px var(--win-border);
+    }
+
+    .free-status-text { font-size: 20px; }
+
+    .free-loading {
+      width: 150px;
+      height: 16px;
+      border: 2px solid var(--win-border);
+      background: var(--white);
+      padding: 2px;
+    }
+
+    .free-loading-fill {
+      height: 100%;
+      width: 74%;
+      background: var(--pink);
+      animation: loadmove 4s linear infinite alternate;
+    }
+
+    @keyframes loadmove {
+      0% { width: 15%; }
+      100% { width: 85%; }
+    }
+
+    /* 13. SECÇÃO INSPO & RÁDIO (COM DUAS COLUNAS) */
+    .inspo-split {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr; /* Divide em 2 colunas */
+      padding: 0; /* Removemos o padding para a rádio colar nas bordas */
+    }
+
+    .inspo-pinterest-section {
+      padding: 30px 20px; /* Mais espaço interno para centralizar bem */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-right: 2px dashed var(--win-border); /* Linha divisória vertical */
+    }
+
+    .inspo-desc-text { 
+      font-size: 26px;
+      margin-bottom: 16px; 
+    }
+
+    .inspo-window-link {
+      display: inline-block;
+      padding: 8px 24px;
+      font-size: 22px;
+      background: var(--blue);
+      border: 2px solid var(--win-border);
+      box-shadow: 3px 3px 0px var(--win-border);
+      transition: 0.1s steps(2);
+    }
+    .inspo-window-link:hover {
+      background: var(--white);
+    }
+
+    .inspo-radio-section {
+      padding: 22px;
+      background: var(--pink-soft);
+    }
+
+    .track-display {
+      border: 2px solid var(--win-border);
+      background: var(--white);
+      color: var(--dark);
+      padding: 12px;
+    }
+
+    .track-container {
+      overflow: hidden;
+      white-space: nowrap;
+      border-bottom: 1px dashed var(--win-border);
+      padding-bottom: 4px;
+    }
+
+    .track-name {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 14s linear infinite;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .track-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    .track-time {
+      font-size: 19px;
+      font-variant-numeric: tabular-nums;
+      color: var(--dark);
+    }
+
+    .track-status {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--purple);
+    }
+
+    .progress-wrap {
+      height: 14px;
+      border: 2px solid var(--win-border);
+      background: var(--white);
+      margin: 14px 0;
+      cursor: pointer;
+      padding: 2px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--purple);
+    }
+
+    .radio-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .ctrl-btn.play {
+      border: 2px solid var(--win-border);
+      background: var(--white);
+      padding: 6px 16px;
+      font-family: var(--pixel);
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 3px 3px 0px var(--win-border);
+      display: inline-flex;
+      align-items: center;
+      transition: 0.1s steps(2);
+    }
+
+    .ctrl-btn.play {
+      min-width: 74px;
+      justify-content: center;
+    }
+
+    #prevBtn,
+    #nextBtn {
+      min-width: 58px;
+      background: var(--blue-soft);
+    }
+
+    #prevBtn:hover,
+    #nextBtn:hover {
+      background: var(--blue);
+    }
+
+    .ctrl-btn.play:hover { background: var(--yellow); }
+
+    .radio-brand {
+      color: var(--gray);
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* 14. CHAMADA PARA AÇÃO FINAL */
+    .final-cta-section {
+      text-align: center;
+      padding: 50px 20px;
+      background: var(--white);
+      border: 3px solid var(--win-border);
+      box-shadow: 8px 8px 0px var(--win-border);
+      margin: 44px 0;
+    }
+
+    .final-cta-title {
+      font-family: var(--title);
+      font-size: 34px;
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+
+    .final-cta-btn {
+      display: inline-block;
+      padding: 10px 28px;
+      font-size: 26px;
+      font-weight: bold;
+      background: var(--pink);
+      border: 2px solid var(--win-border);
+      box-shadow: 4px 4px 0px var(--win-border);
+      color: var(--dark);
+      transition: 0.1s steps(2);
+    }
+
+    .final-cta-btn:hover {
+      background: var(--purple);
+      box-shadow: 2px 2px 0px var(--win-border);
+      transform: translate(2px, 2px);
+    }
+
+    /* 15. RODAPÉ */
+    .footer {
+      margin-top: 40px;
+      padding: 28px 0;
+      border-top: 3px solid var(--win-border);
+      text-align: center;
+      background: var(--white);
+    }
+
+    .footer-logo {
+      font-family: var(--title);
+      font-size: 20px;
+    }
+
+    .footer-copy {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 6px;
+    }
+
+    /* 16. RESPONSIVIDADE (Telemóvel) */
+    @media(max-width: 700px) {
+      .topbar-nav { display: none; }
+      
+      .system-status { font-size: 18px; }
+      .hero-title { font-size: 32px; }
+      .hero-subtitle { font-size: 11px; }
+      .hero-mini { font-size: 18px; }
+      .boot-line { font-size: 16px; }
+      
+      .profile-section { flex-wrap: nowrap; justify-content: flex-start; text-align: left; gap: 14px; }
+      .profile-info-block { align-items: flex-start; }
+      .profile-name { font-size: 28px; }
+      .profile-role { font-size: 11px; }
+      .profile-direct-link { font-size: 16px; }
+      
+      .intro { font-size: 18px; padding: 10px; }
+      .alert-body { font-size: 16px; }
+      
+      .service-name { font-size: 28px; }
+      .service-desc { font-size: 13px; }
+      .service-actions { flex-direction: column; gap: 8px; }
+      .service-btn { font-size: 18px; justify-content: center; width: 100%; }
+      
+      .free-status-text { font-size: 16px; }
+
+      /* Ajuste da Grelha no Telemóvel - Volta a empilhar */
+      .inspo-split { 
+        grid-template-columns: 1fr; /* Volta a ser apenas 1 coluna */
+      }
+      .inspo-pinterest-section {
+        border-right: none; /* Tira a linha vertical */
+        border-bottom: 2px dashed var(--win-border); /* Volta a colocar a linha horizontal */
+        padding: 20px;
+      }
+
+      .inspo-desc-text { font-size: 22px; }
+      .inspo-window-link { font-size: 18px; }
+      .track-name { font-size: 20px; }
+      .track-time { font-size: 16px; }
+      .track-status { font-size: 16px; }
+      .ctrl-btn.play { font-size: 18px; justify-content: center; width: 100%; }
+      .radio-controls { flex-direction: column; align-items: stretch; text-align: center; }
+      .radio-brand { margin-top: 4px; font-size: 16px; }
+      
+      .final-cta-title { font-size: 24px; }
+      .final-cta-btn { font-size: 20px; width: 100%; text-align: center; }
+      .footer-logo { font-size: 18px; }
+      .footer-copy { font-size: 11px; }
+    }
+  </style>
 </head>
 
 <body>
 
-<audio id="audioTrack" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="metadata"></audio>
+  <audio id="audioTrack" preload="metadata"></audio>
 
-<header class="topbar">
-  <div class="topbar-logo">[ glossyframe ]</div>
-  <nav class="topbar-nav">
-    <a href="#profile">profile</a>
-    <a href="#services">serviços</a>
-    <a href="#inspo">inspo</a>
-  </nav>
-  <div class="system-status">
-    <div id="clock">00:00:00</div>
-  </div>
-</header>
-
-<div class="container">
-
-  <section class="hero">
-    <h1 class="hero-title">glossyframe ★</h1>
-    <p class="hero-subtitle">design & direção criativa</p>
-    <div class="hero-mini">for dreamy brands</div>
-    <div class="boot-line"><span class="boot-blink">visual world initialized successfully...</span></div>
-    
-    <div class="pixel-cat" id="retroCat">
-      <svg width="52" height="44" viewBox="0 0 13 11" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated">
-        <rect x="1" y="3" width="10" height="7" fill="#f5f0ff"/>
-        <rect x="1" y="1" width="2" height="3" fill="#f5f0ff"/>
-        <rect x="9" y="1" width="2" height="3" fill="#f5f0ff"/>
-        <rect x="2" y="5" width="2" height="1" fill="#333"/>
-        <rect x="8" y="5" width="2" height="1" fill="#333"/>
-        <rect x="5" y="6" width="2" height="1" fill="#ff6eb4"/>
-        <rect x="4" y="7" width="4" height="1" fill="#333"/>
-        <rect x="11" y="7" width="1" height="3" fill="#f5f0ff"/>
-        <rect x="2" y="5" width="1" height="1" fill="#ffb3d9"/>
-        <rect x="9" y="5" width="1" height="1" fill="#ffb3d9"/>
-      </svg>
+  <header class="topbar">
+    <div class="topbar-logo">[ glossyframe ]</div>
+    <nav class="topbar-nav">
+      <a href="#profile">profile</a>
+      <a href="#services">serviços</a>
+      <a href="#inspo">inspo</a>
+    </nav>
+    <div class="system-status">
+      <div id="clock">00:00:00</div>
     </div>
-  </section>
+  </header>
 
-  <section class="win-box" id="profile">
-    <div class="win-header blue">
-      <span>profile_info.txt</span>
-      <div class="win-controls">
-        <button class="win-btn">_</button>
-        <button class="win-btn">X</button>
-      </div>
-    </div>
-    <div class="win-content">
-      <div class="profile-section">
-        <div class="avatar-pixel">
-          <img src="EBB7DC0B-D9F6-4975-A29E-69D90DBC7DEE.jpeg" alt="Foto de Perfil">
-        </div>
-        <div class="profile-info-block">
-          <div class="profile-name">giovanna</div>
-          <div class="profile-role">graphic designer</div>
-          <a href="mailto:hello@glossyframe.com" class="profile-direct-link">hello@glossyframe.com ↗</a>
-          <a href="https://www.instagram.com/byglossyframe" target="_blank" rel="noopener" class="profile-direct-link">@byglossyframe ↗</a> 
-          <a href="https://www.behance.net/giovannafurlam" target="_blank" rel="noopener" class="profile-direct-link">portfolio ↗</a>
-        </div>
-      </div>
-      <p class="intro">oi, eu sou a giovanna! crio universos visuais inspirados em aesthetics, cultura da internet e direção criativa.</p>
-      <div class="alert-box">
-        <div class="alert-header">⚠ system_message.exe</div>
-        <div class="alert-body">atualmente disponível para novos projetos</div>
-      </div>
-    </div>
-  </section>
+  <div class="container">
 
-  <section class="win-box" id="services">
-    <div class="win-header pink">
-      <span>services_list.log</span>
-      <div class="win-controls">
-        <button class="win-btn">_</button>
-        <button class="win-btn">X</button>
-      </div>
-    </div>
-    <div class="win-content">
-      <div class="service-card">
-        <div class="service-number">01 //</div>
-        <div class="service-name">visual universe ✦</div>
-        <div class="service-desc">direção visual, identidade estética e construção de atmosfera digital para marcas criativas e projetos autorais.</div>
-        <div class="service-actions">
-          <a href="pagina-servico-1.html" class="service-btn">ver mais ↗</a>
-          <a href="link-do-seu-briefing-1" class="service-btn quote" target="_blank" rel="noopener">orçamento ↗</a>
-        </div>
-      </div>
+    <section class="hero">
+      <h1 class="hero-title">glossyframe ★</h1>
+      <p class="hero-subtitle">design & direção criativa</p>
+      <div class="hero-mini">for dreamy brands</div>
+      <div class="boot-line"><span class="boot-blink">visual world initialized successfully...</span></div>
       
-      <div class="service-card">
-        <div class="service-number">02 //</div>
-        <div class="service-name">social media design ✦</div>
-        <div class="service-desc">posts, carrosséis e conteúdo visual com narrativa estética e linguagem visual consistente para redes sociais.</div>
-        <div class="service-actions">
-          <a href="pagina-servico-2.html" class="service-btn">ver mais ↗</a>
-          <a href="link-do-seu-briefing-2" class="service-btn quote" target="_blank" rel="noopener">orçamento ↗</a>
+      <div class="pixel-cat" id="retroCat" title="Faz-me festas!">
+        <svg width="52" height="44" viewBox="0 0 13 11" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated">
+          <rect x="1" y="3" width="10" height="7" fill="#f5f0ff"/>
+          <rect x="1" y="1" width="2" height="3" fill="#f5f0ff"/>
+          <rect x="9" y="1" width="2" height="3" fill="#f5f0ff"/>
+          <rect x="2" y="5" width="2" height="1" fill="#333"/>
+          <rect x="8" y="5" width="2" height="1" fill="#333"/>
+          <rect x="5" y="6" width="2" height="1" fill="#ff6eb4"/>
+          <rect x="4" y="7" width="4" height="1" fill="#333"/>
+          <rect x="11" y="7" width="1" height="3" fill="#f5f0ff"/>
+          <rect x="2" y="5" width="1" height="1" fill="#ffb3d9"/>
+          <rect x="9" y="5" width="1" height="1" fill="#ffb3d9"/>
+        </svg>
+      </div>
+    </section>
+
+    <section class="win-box" id="profile">
+      <div class="win-header blue">
+        <span>profile_info.txt</span>
+        <div class="win-controls">
+          <button class="win-btn" aria-label="Minimizar">_</button>
+          <button class="win-btn" aria-label="Fechar">X</button>
         </div>
       </div>
-
-      <div class="service-card">
-        <div class="service-number">03 //</div>
-        <div class="service-name">creative graphics ✦</div>
-        <div class="service-desc">posters, flyers, capas e peças digitais inspiradas em cultura visual online.</div>
-        <div class="service-actions">
-          <a href="pagina-servico-3.html" class="service-btn">ver mais ↗</a>
-          <a href="link-do-seu-briefing-3" class="service-btn quote" target="_blank" rel="noopener">orçamento ↗</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="free-status-line">
-    <span class="free-status-text">creative system active...</span>
-    <div class="free-loading">
-      <div class="free-loading-fill"></div>
-    </div>
-  </div>
-
-  <section class="radio-box" id="inspo">
-    <div class="win-header">
-      <span>glossy_inspo.exe</span>
-      <div class="win-controls">
-        <button class="win-btn">_</button>
-        <button class="win-btn">X</button>
-      </div>
-    </div>
-    <div class="win-content">
-      <div class="inspo-pinterest-section">
-        <p class="inspo-desc-text">moodboards & refs ✦</p>
-        <a href="https://pin.it/1YmMSFZ1r" class="inspo-window-link" target="_blank" rel="noopener">pinterest ↗</a>
-      </div>
-      
-      <div class="inspo-radio-section">
-
-        <div class="radio-brand">77.7 FM</div>
-        <div class="track-display">
-          <div class="track-container">
-            <div class="track-name">♫ dreamy internet radio station</div>
+      <div class="win-content">
+        <div class="profile-section">
+          <div class="avatar-pixel">
+            <img src="EBB7DC0B-D9F6-4975-A29E-69D90DBC7DEE.jpeg" alt="Foto de Perfil da Giovanna">
           </div>
-          <div class="track-meta">
-            <span class="track-time" id="trackTime">00:00 / 00:00</span>
-            <span class="track-status" id="trackStatus">■ STOPPED</span>
+          <div class="profile-info-block">
+            <div class="profile-name">giovanna</div>
+            <div class="profile-role">graphic designer</div>
+            <a href="mailto:hello@glossyframe.com" class="profile-direct-link">hello@glossyframe.com ↗</a>
+            <a href="https://www.instagram.com/byglossyframe" target="_blank" rel="noopener" class="profile-direct-link">@byglossyframe ↗</a> 
+            <a href="https://www.behance.net/giovannafurlam" target="_blank" rel="noopener" class="profile-direct-link">portfolio ↗</a>
+          </div>
+        </div>
+        <p class="intro">oi, eu sou a giovanna! crio universos visuais inspirados em aesthetics, cultura da internet e direção criativa.</p>
+      </div>
+    </section>
+
+    <section class="alert-box">
+      <div class="alert-header">⚠ system_message</div>
+      <div class="alert-body">atualmente disponível para novos projetos</div>
+    </section>
+
+    <section class="win-box" id="services">
+      <div class="win-header pink">
+        <span>services_list.log</span>
+        <div class="win-controls">
+          <button class="win-btn" aria-label="Minimizar">_</button>
+          <button class="win-btn" aria-label="Fechar">X</button>
+        </div>
+      </div>
+      <div class="win-content">
+        <div class="service-card">
+          <div class="service-number">01 //</div>
+          <div class="service-name">visual universe ✦</div>
+          <div class="service-desc">direção visual, identidade estética e construção de atmosfera digital para marcas criativas e projetos autorais.</div>
+          <div class="service-actions">
+            <a href="pagina-servico-1.html" class="service-btn">ver mais ↗</a>
+            <a href="link-do-seu-briefing-1" class="service-btn quote" target="_blank" rel="noopener">orçamento ↗</a>
           </div>
         </div>
         
-        <div class="progress-wrap" id="progressContainer">
-          <div class="free-loading-fill" style="width: 0%;" id="progressFill"></div>
+        <div class="service-card">
+          <div class="service-number">02 //</div>
+          <div class="service-name">social media design ✦</div>
+          <div class="service-desc">posts, carrosséis e conteúdo visual com narrativa estética e linguagem visual consistente para redes sociais.</div>
+          <div class="service-actions">
+            <a href="pagina-servico-2.html" class="service-btn">ver mais ↗</a>
+            <a href="link-do-seu-briefing-2" class="service-btn quote" target="_blank" rel="noopener">orçamento ↗</a>
+          </div>
         </div>
-        
-        <div class="radio-controls">
-          <button class="ctrl-btn play" id="playBtn">▶ PLAY</button>
-          <a href="#" class="radio-spotify-btn" target="_blank" rel="noopener">spotify ↗</a>
+
+        <div class="service-card">
+          <div class="service-number">03 //</div>
+          <div class="service-name">creative graphics ✦</div>
+          <div class="service-desc">posters, flyers, capas e peças digitais inspiradas em cultura visual online.</div>
+          <div class="service-actions">
+            <a href="pagina-servico-3.html" class="service-btn">ver mais ↗</a>
+            <a href="link-do-seu-briefing-3" class="service-btn quote" target="_blank" rel="noopener">orçamento ↗</a>
+          </div>
         </div>
       </div>
+    </section>
+
+    <div class="free-status-line">
+      <span class="free-status-text">creative system active...</span>
+      <div class="free-loading">
+        <div class="free-loading-fill"></div>
+      </div>
     </div>
-  </section>
 
-  <section class="final-cta-section">
-    <h2 class="final-cta-title">ready to build your own universe? ★ </h2>
-    <a href="mailto:hello@glossyframe.com?subject=vamos%20criar%20juntos!" class="final-cta-btn">vamos criar juntos ↗</a>
-  </section>
+    <section class="radio-box" id="inspo">
+      <div class="win-header">
+        <span>glossy_inspo.exe</span>
+        <div class="win-controls">
+          <button class="win-btn" aria-label="Minimizar">_</button>
+          <button class="win-btn" aria-label="Fechar">X</button>
+        </div>
+      </div>
+      <div class="win-content inspo-split">
+        <div class="inspo-pinterest-section">
+          <p class="inspo-desc-text">moodboards & refs ✦</p>
+          <a href="https://pin.it/1YmMSFZ1r" class="inspo-window-link" target="_blank" rel="noopener">pinterest ↗</a>
+        </div>
+        
+        <div class="inspo-radio-section">
+          <div class="radio-brand">77.7 FM</div>
+          <div class="track-display">
+            <div class="track-container">
+              <div class="track-name">♫ dreamy internet radio station</div>
+            </div>
+            <div class="track-meta">
+              <span class="track-time" id="trackTime">00:00 / 00:00</span>
+              <span class="track-status" id="trackStatus">■ STOPPED</span>
+            </div>
+          </div>
+          
+          <div class="progress-wrap" id="progressContainer">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          
+          <div class="radio-controls">
+            <button class="ctrl-btn play" id="prevBtn">◁◁</button>
+            <button class="ctrl-btn play" id="playBtn">▶ PLAY</button>
+            <button class="ctrl-btn play" id="nextBtn">▷▷</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <footer class="footer">
-    <div class="footer-logo">glossyframe ★</div>
-    <div class="footer-copy">© 2026 ALL RIGHTS RESERVED</div>
-  </footer>
+    <section class="final-cta-section">
+      <h2 class="final-cta-title">ready to build your own universe? ★ </h2>
+      <a href="mailto:hello@glossyframe.com?subject=vamos%20criar%20juntos!" class="final-cta-btn">vamos criar juntos ↗</a>
+    </section>
 
-</div>
+    <footer class="footer">
+      <div class="footer-logo">glossyframe ★</div>
+      <div class="footer-copy">© 2026 ALL RIGHTS RESERVED</div>
+    </footer>
 
-<script>
-/* CLOCK */
-function updateClock(){
-  const now = new Date();
-  const h = String(now.getHours()).padStart(2, "0");
-  const m = String(now.getMinutes()).padStart(2, "0");
-  const s = String(now.getSeconds()).padStart(2, "0");
-  document.getElementById("clock").textContent = `${h}:${m}:${s}`;
-}
-setInterval(updateClock, 1000);
-updateClock();
+  </div>
 
-/* REVEAL ON SCROLL */
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if(entry.isIntersecting){ entry.target.classList.add("show"); }
-  });
-}, { threshold: 0.05 });
+  <script>
+    /* 1. RELÓGIO */
+    function updateClock(){
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, "0");
+      const m = String(now.getMinutes()).padStart(2, "0");
+      const s = String(now.getSeconds()).padStart(2, "0");
+      document.getElementById("clock").textContent = `${h}:${m}:${s}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
 
-document.querySelectorAll(".win-box, .radio-box").forEach((box) => observer.observe(box));
-
-/* CONTROLO DE ÁUDIO */
-const audio = document.getElementById("audioTrack");
-const playBtn = document.getElementById("playBtn");
-const trackTime = document.getElementById("trackTime");
-const trackStatus = document.getElementById("trackStatus");
-const progressFill = document.getElementById("progressFill");
-const progressContainer = document.getElementById("progressContainer");
-let isPlaying = false;
-
-function formatTime(secs){
-  if(isNaN(secs) || !isFinite(secs)) return "00:00";
-  const m = String(Math.floor(secs / 60)).padStart(2, "0");
-  const s = String(Math.floor(secs % 60)).padStart(2, "0");
-  return `${m}:${s}`;
-}
-
-function initTrackTime() {
-  trackTime.textContent = `00:00 / ${formatTime(audio.duration)}`;
-}
-audio.addEventListener("loadedmetadata", initTrackTime);
-if (audio.readyState >= 1) { initTrackTime(); }
-
-playBtn.addEventListener("click", () => {
-  if(isPlaying){
-    audio.pause();
-    playBtn.textContent = "▶ PLAY";
-    trackStatus.textContent = "ⅠⅠ PAUSED";
-    isPlaying = false;
-  } else {
-    trackStatus.textContent = "⌛ LOADING";
-    audio.play()
-      .then(() => {
-        playBtn.textContent = "ⅠⅠ PAUSE";
-        trackStatus.textContent = "▶ PLAYING";
-        isPlaying = true;
-      })
-      .catch(() => {
-        trackStatus.textContent = "⚠ ERROR";
-        playBtn.textContent = "▶ PLAY";
+    /* 2. ANIMAÇÃO AO ROLAR A PÁGINA */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if(entry.isIntersecting){ entry.target.classList.add("show"); }
       });
-  }
-});
+    }, { threshold: 0.05 });
 
-audio.addEventListener("timeupdate", () => {
-  const current = audio.currentTime;
-  const duration = audio.duration || 0;
-  trackTime.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
-  if(duration > 0){
-    progressFill.style.width = `${(current / duration) * 100}%`;
-  }
-});
+    document.querySelectorAll(".win-box, .radio-box").forEach((box) => observer.observe(box));
 
-progressContainer.addEventListener("click", (e) => {
-  const rect = progressContainer.getBoundingClientRect();
-  const clickX = e.clientX - rect.left;
-  const duration = audio.duration;
-  if(duration){
-    audio.currentTime = (clickX / rect.width) * duration;
-  }
-});
+    /* 3. LÓGICA DA RÁDIO */
+    const audio = document.getElementById("audioTrack");
+    const playBtn = document.getElementById("playBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const trackTime = document.getElementById("trackTime");
+    const trackStatus = document.getElementById("trackStatus");
+    const progressFill = document.getElementById("progressFill");
+    const progressContainer = document.getElementById("progressContainer");
 
-/* INTERATIVIDADE DO GATO (CORRIGIDA DEFINITIVAMENTE PARA MÓVEIS/IOS) */
-const cat = document.getElementById("retroCat");
-let audioCtx = null;
+    const tracks = [
+      { title: "digital tears", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
+      { title: "angel.exe", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
+      { title: "ethernet lullaby", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
+      { title: "windows98 heartbreak", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" }
+    ];
 
-function playRetroMeow() {
-  try {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContext) return;
-    
-    if (!audioCtx) {
-      audioCtx = new AudioContext();
+    let currentTrack = 0;
+    let isPlaying = false;
+
+    function loadTrack(index){
+      audio.src = tracks[index].src;
+      document.querySelector(".track-name").textContent = "♫ " + tracks[index].title;
+      audio.load();
     }
-    
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-    
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    
-    osc.type = 'triangle';
-    
-    const now = audioCtx.currentTime;
-    osc.frequency.setValueAtTime(550, now);
-    osc.frequency.exponentialRampToValueAtTime(850, now + 0.08);
-    osc.frequency.exponentialRampToValueAtTime(600, now + 0.25);
-    
-    gain.gain.setValueAtTime(0.15, now);
-    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
-    
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    
-    osc.start(now);
-    osc.stop(now + 0.25);
-  } catch (error) {
-    console.log("AudioContext falhou:", error);
-  }
-}
 
-// Escuta múltiplos eventos para contornar restrições mobile estritas
-['click', 'touchstart'].forEach(eventType => {
-  cat.addEventListener(eventType, (e) => {
-    // Impede comportamentos duplicados se disparar ambos os eventos
-    if(e.type === 'touchstart') e.preventDefault(); 
-    
-    playRetroMeow();
-    cat.classList.add("cat-jump");
-    setTimeout(() => {
-      cat.classList.remove("cat-jump");
-    }, 400);
-  }, { passive: false });
-});
-</script>
+    loadTrack(currentTrack);
+
+    function formatTime(secs){
+      if(isNaN(secs) || !isFinite(secs)){ return "00:00"; }
+      const m = String(Math.floor(secs / 60)).padStart(2, "0");
+      const s = String(Math.floor(secs % 60)).padStart(2, "0");
+      return `${m}:${s}`;
+    }
+
+    function initTrackTime(){
+      trackTime.textContent = `00:00 / ${formatTime(audio.duration)}`;
+    }
+    audio.addEventListener("loadedmetadata", initTrackTime);
+
+    function playAudio() {
+      trackStatus.textContent = "↻ LOADING";
+      audio.play()
+        .then(() => {
+          playBtn.textContent = "❚❚ PAUSE";
+          trackStatus.textContent = "▶ PLAYING";
+          isPlaying = true;
+        })
+        .catch(() => {
+          trackStatus.textContent = "⚠ ERROR";
+        });
+    }
+
+    playBtn.addEventListener("click", () => {
+      if(isPlaying){
+        audio.pause();
+        playBtn.textContent = "▶ PLAY";
+        trackStatus.textContent = "■ STOPPED";
+        isPlaying = false;
+      } else {
+        playAudio();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      currentTrack++;
+      if(currentTrack >= tracks.length){ currentTrack = 0; }
+      loadTrack(currentTrack);
+      if(isPlaying){ playAudio(); }
+    });
+
+    prevBtn.addEventListener("click", () => {
+      currentTrack--;
+      if(currentTrack < 0){ currentTrack = tracks.length - 1; }
+      loadTrack(currentTrack);
+      if(isPlaying){ playAudio(); }
+    });
+
+    audio.addEventListener("ended", () => {
+      currentTrack++;
+      if(currentTrack >= tracks.length){ currentTrack = 0; }
+      loadTrack(currentTrack);
+      playAudio();
+    });
+
+    audio.addEventListener("timeupdate", () => {
+      const current = audio.currentTime;
+      const duration = audio.duration || 0;
+      trackTime.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
+      if(duration > 0){
+        progressFill.style.width = `${(current / duration) * 100}%`;
+      }
+    });
+
+    progressContainer.addEventListener("click", (e) => {
+      const rect = progressContainer.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const duration = audio.duration;
+      if(duration){
+        audio.currentTime = (clickX / rect.width) * duration;
+      }
+    });
+
+    /* 4. INTERATIVIDADE DO GATINHO FLUTUANTE */
+    const cat = document.getElementById("retroCat");
+    let audioCtx = null;
+
+    function playRetroMeow() {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        
+        if (!audioCtx) { audioCtx = new AudioContext(); }
+        if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+        
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        
+        osc.type = 'triangle';
+        
+        const now = audioCtx.currentTime;
+        osc.frequency.setValueAtTime(550, now);
+        osc.frequency.exponentialRampToValueAtTime(850, now + 0.08);
+        osc.frequency.exponentialRampToValueAtTime(600, now + 0.25);
+        
+        gain.gain.setValueAtTime(0.15, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+        
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        
+        osc.start(now);
+        osc.stop(now + 0.25);
+      } catch (error) {
+        console.log("AudioContext falhou:", error);
+      }
+    }
+
+    ['click', 'touchstart'].forEach(eventType => {
+      cat.addEventListener(eventType, (e) => {
+        if(eventType === 'touchstart') e.preventDefault(); 
+        
+        playRetroMeow();
+        cat.classList.add("cat-jump");
+        setTimeout(() => {
+          cat.classList.remove("cat-jump");
+        }, 400);
+      }, { passive: false });
+    });
+  </script>
 
 </body>
 </html>
