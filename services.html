@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>glossyframe ★ design & direção criativa</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* VARIÁVEIS DE CORES E FONTES */
+    :root {
+      --bg-purple: #e2daf1;
+      --win-bg: #ffffff;
+      --win-border: #000000;
+      
+      --pink: #ffc2d4;
+      --pink-soft: #ffe5ec;
+      --blue: #b3e5fc;
+      --blue-soft: #e1f5fe;
+      --yellow: #ffe082;
+      --purple: #b39ddb;
+      
+      --dark: #212121;
+      --white: #ffffff;
+      --gray: #8e8e8e;
+
+      --pixel: 'VT323', monospace;
+      --title: 'Silkscreen', cursive;
+      --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    /* RESET GERAL */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-purple);
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.7) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 1px, transparent 1px);
+      background-size: 24px 24px;
+
+      color: var(--dark);
+      font-family: var(--pixel);
+      overflow-x: hidden;
+      line-height: 1.4;
+      padding-top: 20px; /* Espaço do topo reduzido */
+      -webkit-font-smoothing: none;
+      text-rendering: optimizeSpeed;
+      cursor: crosshair;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.02),
+        rgba(0, 0, 0, 0.02) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    ::selection {
+      background: var(--pink);
+      color: var(--dark);
+    }
+
+    /* SCROLLBAR RETRO */
+    ::-webkit-scrollbar {
+      width: 16px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-left: 2px solid var(--win-border);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--gray);
+      border: 2px solid var(--win-border);
+      box-shadow: inset -2px -2px 0px #555, inset 2px 2px 0px #fff;
+    }
+
+    /* LAYOUT PRINCIPAL */
+    .container {
+      width: 100%;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 22px;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 20px 0 50px; /* Espaço do topo reduzido */
+    }
+
+    .hero-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--title);
+      font-size: 54px;
+      color: var(--dark);
+    }
+
+    .hero-subtitle {
+      font-family: var(--sans);
+      font-size: 16px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-top: 12px;
+      margin-bottom: 24px;
+    }
+
+    /* ESTILOS DE JANELAS */
+    .win-box {
+      margin-bottom: 40px;
+      background: var(--win-bg);
+      border: 3px solid var(--win-border);
+      box-shadow: 8px 8px 0px var(--win-border);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .win-box.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .win-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-bottom: 3px solid var(--win-border);
+      background: var(--purple);
+    }
+
+    .win-header.blue { background: var(--blue); }
+
+    .win-header span {
+      font-family: var(--title);
+      font-size: 14px;
+      color: var(--win-border);
+    }
+
+    .win-controls {
+      display: flex;
+      gap: 4px;
+    }
+
+    .win-btn {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--win-border);
+      background: var(--white);
+      color: var(--win-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-family: monospace;
+      cursor: pointer;
+      box-shadow: 1px 1px 0px var(--win-border);
+      transition: background 0.1s;
+    }
+
+    .win-btn:hover { background: var(--pink-soft); }
+    .win-btn:active {
+      box-shadow: 0px 0px 0px;
+      transform: translate(1px, 1px);
+    }
+
+    .win-content { padding: 22px; }
+
+    /* CARTÕES DE SERVIÇOS E INFO */
+    .service-card, .info-card {
+      padding: 22px 10px;
+      border-bottom: 2px dashed var(--win-border);
+    }
+
+    .service-card:last-child, .info-card:last-child { 
+      border-bottom: none; 
+    }
+
+    .service-number {
+      color: var(--gray);
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .service-name, .info-name {
+      font-size: 36px;
+      color: var(--dark);
+    }
+
+    .service-desc, .info-desc {
+      margin: 8px 0 16px;
+      font-family: var(--sans);
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* DESTAQUES DENTRO DO TEXTO (INVESTIMENTO, EXTRA, FAQ) */
+    .service-desc strong, .info-desc strong {
+      display: inline-block;
+      font-weight: 700;
+      color: var(--dark);
+      background-color: var(--pink-soft);
+      border-bottom: 2px solid var(--win-border);
+      padding: 0 4px;
+      margin-top: 6px;
+    }
+
+    /* RODAPÉ */
+    .footer {
+      margin-top: 40px;
+      padding: 28px 0;
+      border-top: 3px solid var(--win-border);
+      text-align: center;
+      background: var(--white);
+    }
+
+    .footer-logo {
+      font-family: var(--title);
+      font-size: 20px;
+    }
+
+    .footer-copy {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 6px;
+    }
+
+    /* RESPONSIVIDADE BLINDADA PARA CELULAR */
+    @media(max-width: 700px) {
+      .hero-title { font-size: 32px; }
+      .hero-subtitle { font-size: 11px; }
+      
+      .service-name, .info-name { font-size: 28px; }
+      .service-desc, .info-desc { font-size: 13px; }
+      
+      .footer-logo { font-size: 18px; }
+      .footer-copy { font-size: 11px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <section class="hero">
+      <h1 class="hero-title">glossyframe ★</h1>
+      <p class="hero-subtitle">menu de serviços</p>
+    </section>
+
+    <section class="win-box" id="services">
+      <div class="win-header blue">
+        <span>services.txt</span>
+        <div class="win-controls">
+          <button class="win-btn" aria-label="Minimizar">_</button>
+          <button class="win-btn" aria-label="Fechar">X</button>
+        </div>
+      </div>
+      <div class="win-content">
+        
+        <div class="service-card">
+          <div class="service-number">01 //</div>
+          <div class="service-name">visual universe ✦</div>
+          <div class="service-desc">
+            direção visual & universo estético<br><br>
+            construção da identidade estética alinhada à sensação que a marca deseja transmitir. inclui definição de paleta de cores e tipografia, moodboard, referências visuais, styling gráfico e guia visual.<br><br>
+            <strong>investimento</strong><br>
+            R$850<br><br>
+            <strong>extra</strong><br>
+            revisão extra do projeto: R$100
+          </div>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-number">02 //</div>
+          <div class="service-name">social media design ✦</div>
+          <div class="service-desc">
+            design de posts estéticos para redes sociais<br><br>
+            alinhamento do feed à personalidade da marca, fazendo com que o público reconheça seu universo visual. serviço inclui direção criativa, pesquisa de referências, composição estética e desenvolvimento personalizado das peças.<br><br>
+            <strong>investimento</strong><br>
+            3 posts + 1 carrossel: R$300<br>
+            5 posts + 3 carrosséis: R$550<br>
+            8 posts + 4 carrosséis: R$800<br><br>
+            <strong>extra</strong><br>
+            post extra: R$80<br>
+            carrossel extra: R$150<br>
+            revisão extra por peça: R$50
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-number">03 //</div>
+          <div class="service-name">creative graphics ✦</div>
+          <div class="service-desc">
+            materiais gráficos criativos<br><br>
+            criação de materiais digitais ou para impressão. ideal para expandir a linguagem visual da sua marca em campanhas, projetos editoriais ou eventos.<br><br>
+            <strong>investimento</strong><br>
+            R$150<br><br>
+            <strong>extra</strong><br>
+            revisão extra do projeto: R$60
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-number">04 //</div>
+          <div class="service-name">cyber persona ✦</div>
+          <div class="service-desc">
+            site portal da sua identidade digital<br><br>
+            website desenvolvido para transformar sua presença online em uma experiência imersiva e memorável. identidade estética, links, elementos interativos e composição visual personalizada em um espaço digital próprio, com hospedagem gratuita via github pages.<br><br>
+            <strong>investimento</strong><br>
+            R$950<br><br>
+            <strong>extra</strong><br>
+            integração de domínio personalizado: R$200<br>
+            revisão extra do projeto: R$150<br>
+            alteração estrutural após a entrega: R$250
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <section class="win-box" id="profile">
+      <div class="win-header blue">
+        <span>info.txt</span>
+        <div class="win-controls">
+          <button class="win-btn" aria-label="Minimizar">_</button>
+          <button class="win-btn" aria-label="Fechar">X</button>
+        </div>
+      </div>
+      <div class="win-content">
+
+        <div class="info-card">
+          <div class="info-name">★ processo</div>
+          <div class="info-desc"> 
+            <strong>01 pré-briefing</strong><br>
+conhecemos sua marca e necessidades. com tudo alinhado, assinamos o contrato.<br><br>
+            <strong>02 briefing</strong><br> 
+você preenche um formulário detalhado para orientar o processo criativo.<br><br>
+            <strong>03 direção criativa</strong><br>
+iniciamos a pesquisa visual e definimos a linguagem estética.<br><br>
+            <strong>04 criação</strong><br>
+desenvolvimento visual, composição dos elementos, codificação e refinamento estético.<br><br>
+            <strong>05 revisão</strong><br>
+apresentamos o resultado e realizamos a revisão necessária com base no seu feedback.<br><br>
+            <strong>06 entrega</strong><br>
+enviamos todos os arquivos finais organizados e prontos para uso.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-name">★ pagamento</div>
+          <div class="info-desc"> 
+            para oficializar a reserva na agenda e iniciar o projeto, o pagamento é dividido em duas etapas:
+<br><br>
+            <strong>50% na assinatura do contrato</strong>
+<br>
+            <strong>50% na entrega final</strong> 
+<br><br>
+            métodos aceitos: pix e mercado pago.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-name">★ faq</div>
+          <div class="info-desc">
+            <strong>como funciona a nossa comunicação?</strong>
+<br>
+            majoritariamente por e-mail e notion. isso mantém o processo organizado, documentado e sem as distrações do whatsapp.
+<br><br>
+            
+            <strong>quantas revisões estão inclusas?</strong>
+<br>
+            todos os serviços da glossyframe incluem 1 rodada de revisão completa gratuita. caso precise de mais alterações, revisões extras possuem um valor adicional especificado em cada serviço.<br><br>
+            
+            <strong>qual é o prazo de entrega?</strong>
+<br>
+            varia conforme a complexidade da demanda e a disponibilidade da agenda. em média, os projetos levam entre 10 e 20 dias úteis para serem finalizados.
+<br><br>
+            
+            <strong>vocês criam os textos, legendas e copys?</strong>
+<br>
+            o foco principal da glossyframe é direção visual e design. os textos e descrições devem ser enviados por você. oferecemos apoio textual e revisão de coesão quando necessário.
+<br><br>
+            
+            <strong>posso pedir alterações depois da entrega final?</strong>
+<br>
+            sim. alterações solicitadas após a entrega dos arquivos finais são cobradas separadamente, com valor definido conforme a complexidade do ajuste.
+<br><br>
+            
+            <strong>carrosséis tem limite de slides?</strong>
+<br>
+            sim. carrosséis incluem até 5 slides.
+<br><br>
+            
+            <strong>vocês trabalham com urgências?</strong>
+<br>
+            sim, dependendo da disponibilidade da agenda. projetos urgentes possuem taxa adicional de 40% do valor original.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-logo">glossyframe ★</div>
+      <div class="footer-copy">© 2026 ALL RIGHTS RESERVED</div>
+    </footer>
+
+  </div>
+
+  <script>
+    /* ANIMAÇÃO AO ROLAR A PÁGINA */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if(entry.isIntersecting){ entry.target.classList.add("show"); }
+      });
+    }, { threshold: 0.05 });
+
+    document.querySelectorAll(".win-box").forEach((box) => observer.observe(box));
+  </script>
+
+</body>
+</html>
